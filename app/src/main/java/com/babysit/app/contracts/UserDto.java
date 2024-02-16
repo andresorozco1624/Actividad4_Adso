@@ -19,4 +19,5 @@ public class UserDto {
     private String department;
     private String description;
     private String address;
+    private String password;
 }

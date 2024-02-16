@@ -30,13 +30,16 @@ public class UserEntity {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "country")
     private String country;
 
     @Column(name = "city")
     private String city;
 
-    @Column(name = "deparment")
+    @Column(name = "department")
     private String department;
 
     @Column(name = "description")
