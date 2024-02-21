@@ -9,6 +9,7 @@ function getAllUser() {
             console.log(data);
         } else {
             console.log(`Error: ${xhr.status}`);
+
         }
     };
 }
