@@ -80,64 +80,62 @@
             <form class="needs-validation" novalidate>
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label for="firstName" class="form-label">First name</label>
+                        <label for="firstName" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="firstName" placeholder="" value="" required />
                         <div class="invalid-feedback">Ingresa tu nombre.</div>
                     </div>
 
                     <div class="col-sm-6">
-                        <label for="lastName" class="form-label">Last name</label>
+                        <label for="lastName" class="form-label">Apellidos</label>
                         <input type="text" class="form-control" id="lastName" placeholder="" value="" required />
                         <div class="invalid-feedback">Ingresa tus apellidos.</div>
                     </div>
 
                     <div class="col-6">
-                        <label for="email" class="form-label">Email
+                        <label for="email" class="form-label">Correo Electrónico
                         </label>
                         <input type="email" class="form-control" id="email" placeholder="you@example.com" required />
-                        <div class="invalid-feedback">Verifica el correo ingresado</div>
+                        <div class="invalid-feedback" id="emailFeedback">Verifica el correo ingresado</div>
                     </div>
 
                     <div class="col-6">
-                        <label for="emailConfirm" class="form-label">Confirmar Email
+                        <label for="emailConfirm" class="form-label">Confirmar Correo Electrónico
                         </label>
                         <input type="email" class="form-control" id="emailConfirm" placeholder="you@example.com"
                             required />
-                        <div class="invalid-feedback">Verifica el correo de confirmación</div>
+                        <div class="invalid-feedback" id="emailConfirmFeedback">Verifica el correo de confirmación</div>
                     </div>
 
                     <div class="col-6">
                         <label for="password" class="form-label">Contraseña</label>
                         <input type="password" class="form-control" id="password" placeholder="" required />
-                        <div class="invalid-feedback">Ingresa una Contraseña </div>
+                        <div class="invalid-feedback" id="passwordFeedback">Ingresa una Contraseña </div>
                     </div>
 
                     <div class="col-6">
                         <label for="passwordConfirm" class="form-label">Confirmar Contraseña</label>
                         <input type="password" class="form-control" id="passwordConfirm" placeholder="" required />
-                        <div class="invalid-feedback">Confirma la contraseña</div>
+                        <div class="invalid-feedback" id="passwordConfirmFeedback">Confirma la contraseña</div>
                     </div>
-
-
 
 
                     <div class="col-6">
                         <label for="address" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="address" placeholder="Apartment or suite"
+                        <input type="text" class="form-control" id="address" placeholder="Apartamento o Casa"
                             required />
                         <div class="invalid-feedback">Ingresa una dirección</div>
                     </div>
 
                     <div class="col-6">
-                        <label for="phone" class="form-label">Movil </label>
-                        <input type="number" class="form-control" id="phone" placeholder="" required />
+                        <label for="phone" class="form-label">Número Móvil </label>
+                        <input type="number" class="form-control" id="phone" placeholder="302 000 2910" required />
                         <div class="invalid-feedback">Ingresa un numero movil</div>
                     </div>
 
                     <div class="col-md-4">
                         <label for="country" class="form-label">Pais</label>
                         <select class="form-select" id="country" required>
-                            <option value="">Choose...</option>
+                            <option value="">Escoge...</option>
                             <option>Colombia</option>
                         </select>
                         <div class="invalid-feedback">Ingresa un pais</div>
@@ -146,8 +144,14 @@
                     <div class="col-md-4">
                         <label for="state" class="form-label">Departamento</label>
                         <select class="form-select" id="state" required>
-                            <option value="">Choose...</option>
+                            <option value="">Escoge...</option>
                             <option>Atlantico</option>
+                            <option>Antioquia</option>
+                            <option>Cundinamarca</option>
+                            <option>Valle Del Cauca</option>
+                            <option>Magdalena</option>
+                            <option>Bogota D.C</option>
+
                         </select>
                         <div class="invalid-feedback">Ingresa un departamento.</div>
                     </div>
@@ -155,8 +159,14 @@
                     <div class="col-md-4">
                         <label for="state" class="form-label">Ciudad</label>
                         <select class="form-select" id="city" required>
-                            <option value="">Choose...</option>
+                            <option value="">Escoge...</option>
                             <option>Barranquilla</option>
+                            <option>Medellin</option>
+                            <option>Bogota D.C</option>
+                            <option>Cali</option>
+                            <option>Santa Marta</option>
+                            <option>Bogota D.C</option>
+
                         </select>
                         <div class="invalid-feedback">Ingresa una ciudad.</div>
                     </div>
