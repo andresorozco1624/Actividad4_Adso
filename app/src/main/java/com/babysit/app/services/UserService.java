@@ -25,7 +25,7 @@ public class UserService {
             UserDto dto = new UserDto();
 
             dto.setId(entity.getId());
-            dto.setName(entity.getName());
+            dto.setFirstName(entity.getFirstName());
             dto.setLastName(entity.getLastName());
             dto.setAddress(entity.getAddress());
             dto.setEmail(entity.getEmail());
@@ -34,7 +34,7 @@ public class UserService {
             dto.setDescription(entity.getDescription());
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
-            dto.setDepartment(entity.getDepartment());
+            dto.setState(entity.getState());
 
             dtos.add(dto);
 
@@ -49,7 +49,7 @@ public class UserService {
         UserDto dto= new UserDto();
 
         dto.setId(entity.getId());
-        dto.setName(entity.getName());
+        dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setAddress(entity.getAddress());
         dto.setEmail(entity.getEmail());
@@ -58,7 +58,7 @@ public class UserService {
         dto.setDescription(entity.getDescription());
         dto.setCity(entity.getCity());
         dto.setCountry(entity.getCountry());
-        dto.setDepartment(entity.getDepartment());
+        dto.setState(entity.getState());
 
 
         return dto;
@@ -69,7 +69,7 @@ public class UserService {
         List<UserEntity> entities = repository.findAll();
         UserEntity entity = new UserEntity();
 
-        entity.setName(dto.getName());
+        entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setAddress(dto.getAddress());
         entity.setEmail(dto.getEmail());
@@ -78,7 +78,7 @@ public class UserService {
         entity.setDescription(dto.getDescription());
         entity.setCity(dto.getCity());
         entity.setCountry(dto.getCountry());
-        entity.setDepartment(dto.getDepartment());
+        entity.setState(dto.getState());
 
         this.repository.save(entity);
         
@@ -92,7 +92,7 @@ public class UserService {
 
         UserEntity entity = this.repository.getReferenceById(id);
 
-        entity.setName(dto.getName());
+        entity.setFirstName(dto.getFirstName());
         entity.setLastName(dto.getLastName());
         entity.setAddress(dto.getAddress());
         entity.setEmail(dto.getEmail());
@@ -101,7 +101,7 @@ public class UserService {
         entity.setDescription(dto.getDescription());
         entity.setCity(dto.getCity());
         entity.setCountry(dto.getCountry());
-        entity.setDepartment(dto.getDepartment());
+        entity.setState(dto.getState());
 
         this.repository.save(entity);
         return "El usuario ha sido actualizado";

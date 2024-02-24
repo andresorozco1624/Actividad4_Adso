@@ -18,11 +18,11 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
 
     @Column(name = "last_name")
-    private String LastName;
+    private String lastName;
 
     @Column(name = "phone")
     private String phone;
@@ -39,8 +39,8 @@ public class UserEntity {
     @Column(name = "city")
     private String city;
 
-    @Column(name = "department")
-    private String department;
+    @Column(name = "state")
+    private String state;
 
     @Column(name = "description")
     private String description;

@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 
 public class UserDto {
     private Long id;
-    private String name;
-    private String LastName;
+    private String firstName;
+    private String lastName;
     private String phone;
     private String email;
     private String country;
     private String city;
-    private String department;
+    private String state;
     private String description;
     private String address;
     private String password;

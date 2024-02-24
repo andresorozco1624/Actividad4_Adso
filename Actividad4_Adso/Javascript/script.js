@@ -11,9 +11,9 @@ var description = document.getElementById("description");
 
 
 
-function createUser() {
+function createObjUser() {
     var objUser = {
-        "firsName": firstName.value,
+        "firstName": firstName.value,
         "lastName": lastName.value,
         "email": email.value,
         "password": password.value,
@@ -25,32 +25,62 @@ function createUser() {
         "description": description.value,
 
     };
-    return objUser;
+
+    return JSON.stringify(objUser);
+
 }
 
+function createUser() {
 
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:8080/user");
+    objetjson = createObjUser();
+    console.log(objetjson);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(objetjson);
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
 
-(function () {
+}
 
-    boton = document.querySelector(".btn");
+function addUserCard(data) {
+
     squareGroup = document.getElementById("clientsGroup");
-
-    boton.addEventListener("click", () => {
-
+    console.log(data.length)
+    for (var i = 0; i < data.length; i++) {
+        console.log("data")
         const nuevoDiv = document.createElement("div");
         nuevoDiv.className = "col";
         nuevoDiv.innerHTML = `<div class="card">
-        <img src="Images/user.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in
-                to additional content. This content is a little bit longer.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>       
-                </div>
-    </div>`;
+            <img src="Images/user.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"> `+ data[i].firstName + ` ` + data[i].lastName + `</h5>
+                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                In ipsa cupiditate repellat doloremque,
+                quisquam sunt dolores nihil nostrum nam similique sed,.</p>
+
+                    <ul class="list-group list-group-flush">
+    <li class="list-group-item"><small class="text-muted">`+ data[i].country + `,` + data[i].state + `,` + data[i].city + `</small></li>
+  </ul>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>       
+                    </div>
+        </div>`;
         squareGroup.appendChild(nuevoDiv);
-    })
-}());
+    }
+
+
+
+};
+
+
+
 
 
 
@@ -269,12 +299,21 @@ this was also applied to the password textboxes */
                     event.preventDefault()
                     event.stopPropagation()
                 }
+                else {
+                    createUser();
+                }
 
                 form.classList.add('was-validated')
             }, false)
         })
-})()
+})();
 
+(function () {
+    if (window.location.pathname == "/workwithus.html") {
+        getAllUser();
+
+    }
+}());
 
 function getAllUser() {
     const xhr = new XMLHttpRequest();
@@ -284,7 +323,8 @@ function getAllUser() {
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             const data = xhr.response;
-            console.log(data);
+
+            addUserCard(data);
         } else {
             console.log(`Error: ${xhr.status}`);
         }
