@@ -20,14 +20,14 @@
             registerBtnFlag = ``;
             loginBtnFlag = `display:none;`;
             break;
-        case "/registro.html":
+        case "/register.html":
 
             registerBtnFlag = `display:none;`;
             loginBtnFlag = ``;
             break;
         default:
-            registerBtnFlag = `display:none;`;
-            loginBtnFlag = `display:none;`;
+            registerBtnFlag = ``;
+            loginBtnFlag = ``;
             break;
     }
 
@@ -50,19 +50,19 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/index.html" class="nav-link px-2 text-secondary">Inicio</a></li>
             <li>
-                <a href="#" class="nav-link px-2 text-white">Encuentra un niñera</a>
+                <a href="/findbabysister.html" class="nav-link px-2 text-white">Encuentra un niñera</a>
             </li>
             <li>
-                <a href="#" class="nav-link px-2 text-white">Trabajar con nosostros</a>
+                <a href="/workwithus.html" class="nav-link px-2 text-white">Trabajar con nosostros</a>
             </li>
-            <li><a href="#" class="nav-link px-2 text-white">Conocenos</a></li>
+            <li><a href="/aboutus.html" class="nav-link px-2 text-white">Conocenos</a></li>
         </ul>
     
         <div class="text-end">
     
             <a class="btn btn-outline-light me-2" href="login.html" style="` + loginBtnFlag + `"role="button">Ingresa</a>
     
-            <a class="btn" style="background-color: #3c302b; color: #ffff;  ` + registerBtnFlag + `" href="registro.html"
+            <a class="btn" style="background-color: #3c302b; color: #ffff;  ` + registerBtnFlag + `" href="register.html"
                 role="button">Registrate</a>
         </div>
     </div>
