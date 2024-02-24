@@ -1,3 +1,34 @@
+var firstName = document.getElementById("firstName");
+var lastName = document.getElementById("lastName");
+var email = document.getElementById("email");
+var password = document.getElementById("password");
+var address = document.getElementById("address");
+var phone = document.getElementById("phone");
+var country = document.getElementById("country");
+var state = document.getElementById("state");
+var city = document.getElementById("city");
+var description = document.getElementById("description");
+
+
+
+function createUser() {
+    var objUser = {
+        "firsName": firstName.value,
+        "lastName": lastName.value,
+        "email": email.value,
+        "password": password.value,
+        "address": address.value,
+        "phone": phone.value,
+        "country": country.value,
+        "state": state.value,
+        "city": city.value,
+        "description": description.value,
+
+    };
+    return objUser;
+}
+
+
 
 (function () {
 
@@ -20,6 +51,7 @@
         squareGroup.appendChild(nuevoDiv);
     })
 }());
+
 
 
 /* this function allows the header and footer to be dynamic".*/
