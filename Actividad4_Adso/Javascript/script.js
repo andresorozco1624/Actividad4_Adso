@@ -133,7 +133,7 @@ function addUserCard(data) {
         </a>
     
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="/index.html" class="nav-link px-2 text-secondary">Inicio</a></li>
+            <li><a href="/index.html" class="nav-link px-2 text-white">Inicio</a></li>
             <li>
                 <a href="/findbabysister.html" class="nav-link px-2 text-white">Encuentra un niñera</a>
             </li>
@@ -147,7 +147,7 @@ function addUserCard(data) {
     
             <a class="btn btn-outline-light me-2" href="login.html" style="` + loginBtnFlag + `"role="button">Ingresa</a>
     
-            <a class="btn" style="background-color: #3c302b; color: #ffff;  ` + registerBtnFlag + `" href="register.html"
+            <a class="btn" style="background-color: #ffff; color: #5eb1d2;  ` + registerBtnFlag + `" href="register.html"
                 role="button">Registrate</a>
         </div>
     </div>
