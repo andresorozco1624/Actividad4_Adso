@@ -8,6 +8,7 @@ var country = document.getElementById("country");
 var state = document.getElementById("state");
 var city = document.getElementById("city");
 var description = document.getElementById("description");
+var profile = document.getElementById("clientProfile");
 
 
 
@@ -22,6 +23,7 @@ function createObjUser() {
         "country": country.value,
         "state": state.value,
         "city": city.value,
+        "profile": profile.value,
         "description": description.value,
 
     };

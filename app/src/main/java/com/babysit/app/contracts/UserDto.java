@@ -20,4 +20,5 @@ public class UserDto {
     private String description;
     private String address;
     private String password;
+    private Long rol;
 }

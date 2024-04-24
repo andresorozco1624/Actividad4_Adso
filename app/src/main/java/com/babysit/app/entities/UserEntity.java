@@ -48,4 +48,7 @@ public class UserEntity {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "rol_id")
+    private Long rol;
+
 }

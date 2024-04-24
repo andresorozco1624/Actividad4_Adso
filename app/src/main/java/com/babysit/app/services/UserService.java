@@ -35,6 +35,7 @@ public class UserService {
             dto.setCity(entity.getCity());
             dto.setCountry(entity.getCountry());
             dto.setState(entity.getState());
+            dto.setRol(entity.getRol());
 
             dtos.add(dto);
 
@@ -59,6 +60,7 @@ public class UserService {
         dto.setCity(entity.getCity());
         dto.setCountry(entity.getCountry());
         dto.setState(entity.getState());
+        dto.setRol(entity.getRol());
 
 
         return dto;
@@ -79,6 +81,7 @@ public class UserService {
         entity.setCity(dto.getCity());
         entity.setCountry(dto.getCountry());
         entity.setState(dto.getState());
+        entity.setRol(dto.getRol());
 
         this.repository.save(entity);
         
@@ -102,6 +105,7 @@ public class UserService {
         entity.setCity(dto.getCity());
         entity.setCountry(dto.getCountry());
         entity.setState(dto.getState());
+        entity.setRol(dto.getRol());
 
         this.repository.save(entity);
         return "El usuario ha sido actualizado";
