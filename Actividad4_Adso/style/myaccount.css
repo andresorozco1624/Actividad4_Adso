@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 .form-control-dark {
     border-color: var(--bs-gray);
 }
@@ -37,18 +42,40 @@ main {
     height: 90%;
 }
 
-.container {
-    top: 40px;
+
+.payments {
+    top: 20px;
     left: 330px;
+}
+
+.container {
+    top: 20px;
+    left: 305px;
 }
 
 .sideBar .nav-link {
     color: #fff;
 }
 
+.nav-link {
+    color: #297aa0;
+}
+
+
+.containerHeader {
+    height: 15vh;
+}
+
+.logo,
+.menu,
+.option {
+    height: 100%;
+}
+
+
 
 /*
-e6b7a3
+
 #5eb1d2 header y footer
 #a3d2e6 cards
 #297aa0 buttons

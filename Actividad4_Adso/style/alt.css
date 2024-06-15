@@ -1,0 +1,129 @@
+/*Lo hacemos para quitar los margin y padding por defecto*/
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+
+}
+
+
+
+/* HEADER*/
+
+header {
+    background-color: #1e5b78;
+
+
+
+    /*max-width: 71rem;*/
+}
+
+header nav:first-child {
+    padding-left: 2rem;
+}
+
+header .nav-link:hover {
+    transform: scale(1.3);
+
+}
+
+header .nav-item .active {
+    transform: scale(1.3);
+    font-weight: bolder;
+
+
+}
+
+.userName {
+    font-weight: 300;
+    color: #fff;
+}
+
+
+
+
+
+.menu-profile {
+
+    margin-left: 8.9vw;
+}
+
+
+/*SIDEBAR*/
+
+.sideBarMenu {
+
+    top: 0;
+
+    bottom: 0;
+    /* rtl:remove */
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    /* Behind the navbar */
+    padding: 3rem 0 0;
+    /* Height of navbar */
+    overflow: hidden;
+
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .2);
+
+
+}
+
+
+
+
+
+
+.sideBarMenu ul li:last-child {
+    margin-top: 10rem;
+}
+
+.nav-link {
+    color: #1e5b78;
+    font-weight: 300;
+}
+
+
+.title-main {
+    font-weight: bold;
+    color: #333333da;
+}
+
+.sideBarMenu .nav-item .bi {
+    fill: #1e5b78;
+}
+
+
+.sideBarMenu .nav-link:hover {
+    transform: scale(1.1);
+    color: #1e5b78;
+    box-shadow: var(--bs-box-shadow) !important;
+}
+
+
+
+.sideBarMenu .nav-item .active {
+    font-weight: bold;
+    background-color: #1e5b78;
+    color: #fff;
+
+}
+
+
+
+
+
+.sideBarMenu .nav-item:hover .bi {}
+
+.sideBarMenu .nav-item .active .bi {
+    fill: #fff;
+}
+
+
+
+
+main>div:first-child {}
+
+footer {
+    background-color: #1e5b78;
+}
