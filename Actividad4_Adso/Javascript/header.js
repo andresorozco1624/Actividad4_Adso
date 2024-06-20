@@ -64,7 +64,7 @@
                     </a>
                     <ul class="dropdown-menu menu-profile text-small shadow  " aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="myaccount.html">Mi cuenta</a></li>
-                        <li><a class="dropdown-item" href="settings.html">Configuraciones</a></li>
+                        <li><a class="dropdown-item" href="settings.html">Contactanos</a></li>
                         <li><a class="dropdown-item" href="faq.html">FAQ</a></li>
 
 
