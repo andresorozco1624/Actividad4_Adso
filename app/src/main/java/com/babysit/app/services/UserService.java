@@ -32,9 +32,7 @@ public class UserService {
             dto.setPassword(entity.getPassword());
             dto.setPhone(entity.getPhone());
             dto.setDescription(entity.getDescription());
-            dto.setCity(entity.getCity());
-            dto.setCountry(entity.getCountry());
-            dto.setState(entity.getState());
+
             dto.setRol(entity.getRol());
 
             dtos.add(dto);
@@ -57,9 +55,7 @@ public class UserService {
         dto.setPassword(entity.getPassword());
         dto.setPhone(entity.getPhone());
         dto.setDescription(entity.getDescription());
-        dto.setCity(entity.getCity());
-        dto.setCountry(entity.getCountry());
-        dto.setState(entity.getState());
+
         dto.setRol(entity.getRol());
 
 
@@ -78,9 +74,7 @@ public class UserService {
         entity.setPassword(dto.getPassword());
         entity.setPhone(dto.getPhone());
         entity.setDescription(dto.getDescription());
-        entity.setCity(dto.getCity());
-        entity.setCountry(dto.getCountry());
-        entity.setState(dto.getState());
+
         entity.setRol(dto.getRol());
 
         this.repository.save(entity);
@@ -102,9 +96,6 @@ public class UserService {
         entity.setPassword(dto.getPassword());
         entity.setPhone(dto.getPhone());
         entity.setDescription(dto.getDescription());
-        entity.setCity(dto.getCity());
-        entity.setCountry(dto.getCountry());
-        entity.setState(dto.getState());
         entity.setRol(dto.getRol());
 
         this.repository.save(entity);

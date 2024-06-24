@@ -1,27 +1,27 @@
 package com.babysit.app.entities;
 
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Data
 
-@Table(name = "rol")
+@Table(name = "identification")
 
-public class RolEntity {
+public class IdentificationEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
+    @Column (name = "title")
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "rol")
-    private List <UserEntity> users;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "identification")
+    private List<UserEntity> userEntities;
+
 }

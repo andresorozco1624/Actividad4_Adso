@@ -1,5 +1,7 @@
 package com.babysit.app.contracts;
 
+import com.babysit.app.entities.RolEntity;
+import com.babysit.app.entities.AddressEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,11 +16,9 @@ public class UserDto {
     private String lastName;
     private String phone;
     private String email;
-    private String country;
-    private String city;
-    private String state;
+
     private String description;
-    private String address;
+    private AddressEntity address;
     private String password;
-    private Long rol;
+    private RolEntity rol;
 }
