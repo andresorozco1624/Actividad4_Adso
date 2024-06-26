@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 public class PaymentEntity {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "date")
@@ -27,7 +26,7 @@ public class PaymentEntity {
     @Column(name = "fare", nullable = false)
     private double fare;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private PaymentType type;
 

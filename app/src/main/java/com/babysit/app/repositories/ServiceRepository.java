@@ -1,14 +1,20 @@
 package com.babysit.app.repositories;
 
 import com.babysit.app.entities.ServiceEntity;
+import com.babysit.app.utils.ServiceState;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ServiceRepository extends
         JpaRepository<ServiceEntity, Long>,
         JpaSpecificationExecutor<ServiceEntity> {
 
-   // List<ServiceEntity> findByfk_user_id (Long id);
+
+
+    List<ServiceEntity> findByState(ServiceState state);
+
+
 }

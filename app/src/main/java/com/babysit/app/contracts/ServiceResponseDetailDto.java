@@ -5,11 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class ServiceRequestUpdateInProgressDto {
+public class ServiceResponseDetailDto {
+    private Long id;
+    private double fare;
+    private LocalDateTime date;
+    private Duration hour;
     private ServiceState state;
+    private String indication;
+
 }
