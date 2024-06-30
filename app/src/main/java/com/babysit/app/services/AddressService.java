@@ -1,6 +1,6 @@
 package com.babysit.app.services;
 
-import com.babysit.app.contracts.AddressDto;
+import com.babysit.app.contracts.AddressResponseDetailDto;
 import com.babysit.app.entities.AddressEntity;
 import com.babysit.app.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +15,25 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public List<AddressDto> getAddressByState (String state){
+    public List<AddressResponseDetailDto> getAddressByState (String state){
 
         List<AddressEntity> addressEntities = addressRepository.findByState(state);
         return becomeToDtos(addressEntities);
     }
 
-    public  List<AddressDto> getAllAddress(){
+    public  List<AddressResponseDetailDto> getAllAddress(){
         List<AddressEntity> addressEntities = addressRepository.findAll();
         return becomeToDtos(addressEntities);
 
     }
 
-    public List<AddressDto> becomeToDtos (List<AddressEntity> addressEntities){
+    public List<AddressResponseDetailDto> becomeToDtos (List<AddressEntity> addressEntities){
 
-        List<AddressDto> addressDtos = new ArrayList<>();
+        List<AddressResponseDetailDto> addressDtos = new ArrayList<>();
 
         for (int i=0; i < addressEntities.size() ; i++){
             AddressEntity addressEntity = addressEntities.get(i);
-            AddressDto addressDto = new AddressDto();
+            AddressResponseDetailDto addressDto = new AddressResponseDetailDto();
 
             addressDto.setCity(addressEntity.getCity());
             addressDto.setCountry(addressEntity.getCountry());

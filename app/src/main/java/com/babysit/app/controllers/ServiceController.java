@@ -49,7 +49,7 @@ public class ServiceController {
     }
 
     @GetMapping("/state/{state}")
-    public List<ServiceEntity> getServiceByState(@PathVariable("state") String state){
+    public List<ServiceResponseDetailDto> getServiceByState(@PathVariable("state") String state){
 
         return this.serviceService.getServiceByState(state);
     }

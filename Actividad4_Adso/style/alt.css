@@ -286,6 +286,46 @@ thead th {
 }
 
 
+/*******My account*******/
+
+.containerBabysits .card-text {
+    font-size: 0.8em;
+    height: 10.3vh;
+    overflow: hidden;
+
+}
+
+.containerBabysits .dataSensible small {
+    font-size: 0.6em;
+}
+
+.containerBabysits .saveUser:hover {
+    stroke: red;
+    stroke-width: 2rem;
+
+}
+
+
+
+
+
+.containerBabysits .numServices {
+    font-size: 0.6em;
+}
+
+.containerBabysits .rating .star {
+    font-size: x-small;
+
+}
+
+.containerBabysits .card-title {
+    font-size: 0.9em;
+    text-ali
+}
+
+/***********************/
+
+
 
 /**********************************/
 

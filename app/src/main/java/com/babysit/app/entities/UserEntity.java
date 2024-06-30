@@ -2,6 +2,7 @@ package com.babysit.app.entities;
 
 
 import com.babysit.app.entities.AddressEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,6 +55,7 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List <ServiceEntity> serviceUser;
 
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "babysit")
     private List <ServiceEntity> serviceBabysit;
 
@@ -70,6 +72,7 @@ public class UserEntity {
     @ManyToOne
     @JoinColumn(name = "fk_identificationId",nullable = false)
     private IdentificationEntity identification;
+
 
     @ManyToOne
     @JoinColumn(name = "fk_addressId",nullable = false)

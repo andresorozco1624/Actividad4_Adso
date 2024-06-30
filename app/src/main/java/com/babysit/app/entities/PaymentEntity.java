@@ -2,6 +2,7 @@ package com.babysit.app.entities;
 
 import com.babysit.app.utils.PaymentState;
 import com.babysit.app.utils.PaymentType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -34,6 +35,7 @@ public class PaymentEntity {
     @Enumerated(EnumType.STRING)
     private PaymentState state;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pagoId")
     private ServiceEntity serviceEntity;
 

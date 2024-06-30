@@ -77,10 +77,10 @@ public class ServiceService {
     }
 
 
-    public List<ServiceEntity> getServiceByState(String state){
+    public List<ServiceResponseDetailDto> getServiceByState(String state){
 
         ServiceState serviceState=ServiceState.valueOf(state);
-        return this.serviceRepository.findByState(serviceState);
+        return becomeToDto(this.serviceRepository.findByState(serviceState)) ;
 
     }
 

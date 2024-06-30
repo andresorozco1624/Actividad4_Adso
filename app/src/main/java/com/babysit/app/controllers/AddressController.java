@@ -1,7 +1,6 @@
 package com.babysit.app.controllers;
 
-import com.babysit.app.contracts.AddressDto;
-import com.babysit.app.entities.AddressEntity;
+import com.babysit.app.contracts.AddressResponseDetailDto;
 import com.babysit.app.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +19,12 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping("/state/{state}")
-    public List<AddressDto> findByState (@PathVariable("state") String state){
+    public List<AddressResponseDetailDto> findByState (@PathVariable("state") String state){
         return addressService.getAddressByState(state);
     }
 
     @GetMapping("")
-    public List<AddressDto> findAllAddress (){
+    public List<AddressResponseDetailDto> findAllAddress (){
         return addressService.getAllAddress();
     }
 }
