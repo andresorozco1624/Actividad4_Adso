@@ -48,4 +48,10 @@ public class UserController {
     public String addFavoriteBabysit (@PathVariable("userId") Long userId,@PathVariable("babysitId") Long babysitId ){
         return this.service.addFavoriteBabysit(userId,babysitId);
     }
+
+    @GetMapping("/{userId}/favorites")
+    public List <UserResponseDetailDto> getFavoritesBabysits(@PathVariable("userId") Long userId){
+        return this.service.findFavoritesBabysit(userId);
+    }
+
 }

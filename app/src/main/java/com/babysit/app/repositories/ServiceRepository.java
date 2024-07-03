@@ -1,6 +1,8 @@
 package com.babysit.app.repositories;
 
+import com.babysit.app.contracts.ServiceResponseDetailDto;
 import com.babysit.app.entities.ServiceEntity;
+import com.babysit.app.entities.UserEntity;
 import com.babysit.app.utils.ServiceState;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -16,5 +18,8 @@ public interface ServiceRepository extends
 
     List<ServiceEntity> findByState(ServiceState state);
 
+    List<ServiceEntity> findByUserAndState(UserEntity user, ServiceState state);
 
+
+    List<ServiceEntity> findByUser(UserEntity userEntity);
 }

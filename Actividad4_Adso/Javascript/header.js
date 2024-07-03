@@ -48,10 +48,10 @@
                 <span style="color: white;"><Strong class="fs-4">BabySit</Strong></span>
             </a>
             <ul class="col-7 navbar-nav flex-row flex-wrap justify-content-center ps-5">
-                <li class="nav-item "><a class="nav-link px-4 text-white" href="">Inicio</a></li>
-                <li class="nav-item "><a class="nav-link px-4 text-white" href="">Niñeras</a></li>
-                <li class="nav-item "><a class="nav-link px-4 text-white" href="">Trabajos</a></li>
-                <li class="nav-item "><a class="nav-link px-4 text-white" href="">Conocenos</a></li>
+                <li class="nav-item "><a class="nav-link px-4 text-white" href="index.html">Inicio</a></li>
+                <li class="nav-item "><a class="nav-link px-4 text-white" href="findbabysister.html">Niñeras</a></li>
+                <li class="nav-item "><a class="nav-link px-4 text-white" href="workwithus.html">Trabajos</a></li>
+                <li class="nav-item "><a class="nav-link px-4 text-white" href="aboutus.html">Conocenos</a></li>
 
             </ul>
             <div class="col">

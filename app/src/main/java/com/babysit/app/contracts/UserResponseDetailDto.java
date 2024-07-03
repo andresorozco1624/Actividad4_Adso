@@ -19,6 +19,5 @@ public class UserResponseDetailDto {
     private String email;
     private String description;
     private AddressResponseDetailDto address;
-    private String password;
     private RolResponseDetailDto rol;
 }

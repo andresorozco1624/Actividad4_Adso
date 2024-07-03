@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("payment")
 public class PaymentController {
@@ -36,4 +37,10 @@ public class PaymentController {
     public List<PaymentResponseDetailDto> findAllPayments(){
         return this.paymentService.findAllPayments();
     }
+
+    @GetMapping("/{userId}")
+    public List<PaymentResponseDetailDto> findUserPayment(@PathVariable("userId") Long userId){
+        return this.paymentService.findUserPayment(userId);
+    }
+
 }

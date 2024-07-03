@@ -4,6 +4,7 @@ package com.babysit.app.services;
 import com.babysit.app.contracts.*;
 import com.babysit.app.entities.PaymentEntity;
 import com.babysit.app.entities.ServiceEntity;
+import com.babysit.app.entities.UserEntity;
 import com.babysit.app.repositories.PaymentRepository;
 import com.babysit.app.repositories.ServiceRepository;
 import com.babysit.app.repositories.UserRepository;
@@ -84,6 +85,12 @@ public class ServiceService {
 
     }
 
+    public List<ServiceResponseDetailDto> getServicesByUserAndState (Long userId,String state){
+        ServiceState serviceState = ServiceState.valueOf(state);
+        UserEntity userEntity = this.userRepository.getReferenceById(userId);
+        return becomeToDto(this.serviceRepository.findByUserAndState(userEntity,serviceState));
+    }
+
     public List<ServiceResponseDetailDto> findAllServices() {
         List<ServiceEntity> serviceEntities = this.serviceRepository.findAll();
 
@@ -96,16 +103,22 @@ public class ServiceService {
         for(int i=0; i<serviceEntities.size();i++){
             ServiceEntity serviceEntity = serviceEntities.get(i);
             ServiceResponseDetailDto serviceResponse = new ServiceResponseDetailDto();
-
             serviceResponse.setDate(serviceEntity.getDate());
             serviceResponse.setIndication(serviceEntity.getIndication());
             serviceResponse.setHour(serviceEntity.getHour());
             serviceResponse.setFare(serviceEntity.getFare());
             serviceResponse.setId(serviceEntity.getId());
             serviceResponse.setState(serviceEntity.getState());
-
             serviceResponseDetailDtos.add(serviceResponse);
+
         }
         return serviceResponseDetailDtos;
+    }
+
+    public List<ServiceResponseDetailDto> getServicesByUser(Long userId) {
+
+        UserEntity userEntity = this.userRepository.getReferenceById(userId);
+        List<ServiceEntity> services = this.serviceRepository.findByUser(userEntity);
+        return becomeToDto(services);
     }
 }

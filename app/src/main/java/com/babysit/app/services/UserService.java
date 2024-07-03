@@ -68,15 +68,16 @@ public class UserService {
     public UserResponseDetailDto becomeToDto (UserEntity userEntity){
 
         UserResponseDetailDto userDto = new UserResponseDetailDto();
+        userDto.setId(userEntity.getId());
         userDto.setFirstName(userEntity.getFirstName());
         userDto.setLastName(userEntity.getLastName());
         userDto.setAddress(AddressResponseDetailDto.builder()
+                        .id(userEntity.getAddress().getId())
                         .city(userEntity.getAddress().getCity())
                         .state(userEntity.getAddress().getState())
                         .country(userEntity.getAddress().getCountry())
                 .build());
         userDto.setEmail(userEntity.getEmail());
-        userDto.setPassword(userEntity.getPassword());
         userDto.setPhone(userEntity.getPhone());
         userDto.setDescription(userEntity.getDescription());
         userDto.setRol(RolResponseDetailDto.builder()
@@ -112,5 +113,16 @@ public class UserService {
 
         return entity;
 
+    }
+
+    public List<UserResponseDetailDto> findFavoritesBabysit(Long userId) {
+       UserEntity userEntity = this.repository.getReferenceById(userId);
+       List<UserResponseDetailDto> userResponse = new ArrayList<>();
+       List<UserEntity> favoritesbabysits = userEntity.getFavoriteBabysits();
+
+       for (int i=0; i<favoritesbabysits.size();i++){
+           userResponse.add(becomeToDto(favoritesbabysits.get(i)));
+       }
+       return userResponse;
     }
 }

@@ -42,7 +42,7 @@ public class ServiceEntity {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "fk_userId", nullable = false)
+    @JoinColumn(name = "user", nullable = false)
     private UserEntity user;
 
     @JsonIgnore
@@ -50,7 +50,7 @@ public class ServiceEntity {
     @JoinColumn(name = "fk_babysitId")
     private UserEntity babysit;
 
-    @JsonIgnore
+
     @OneToOne
     @JoinColumn(name = "fk_pagoId")
     private PaymentEntity pagoId;

@@ -18,4 +18,5 @@ public class PaymentResponseDetailDto {
     private double fare;
     private PaymentState state;
     private PaymentType type;
+    private Long service;
 }

@@ -50,9 +50,19 @@ public class ServiceController {
 
     @GetMapping("/state/{state}")
     public List<ServiceResponseDetailDto> getServiceByState(@PathVariable("state") String state){
-
         return this.serviceService.getServiceByState(state);
     }
+
+    @GetMapping("/{userId}/state/{state}")
+    public List<ServiceResponseDetailDto> getServiceByUserAndState (@PathVariable("userId")Long userId,@PathVariable("state") String state){
+        return this.serviceService.getServicesByUserAndState(userId,state);
+    }
+
+    @GetMapping("/{userId}")
+    public List<ServiceResponseDetailDto> getServicesByUser (@PathVariable("userId")Long userId){
+        return this.serviceService.getServicesByUser(userId);
+    }
+
 
     @GetMapping("/all")
     public  List<ServiceResponseDetailDto> findAllServices(){

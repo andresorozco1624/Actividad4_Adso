@@ -130,9 +130,9 @@ main>div:first-child {}
 
 /* CONFIGURACIONES */
 
-.btn {
+/*.btn {
     background-color: #1e5b78;
-}
+}*/
 
 /*******************/
 
@@ -234,6 +234,12 @@ thead th {
 
 }
 
+.servicesCard .card {
+    width: 32vw;
+    max-width: 90vw;
+    max-height: 50vh;
+}
+
 .servicesGroup .btNewService svg:last-child {
     position: relative;
     top: -0.5rem;
@@ -307,8 +313,6 @@ thead th {
 
 
 
-
-
 .containerBabysits .numServices {
     font-size: 0.6em;
 }
@@ -320,20 +324,95 @@ thead th {
 
 .containerBabysits .card-title {
     font-size: 0.9em;
-    text-ali
+
 }
 
-/***********************/
+/*****FindBabysister*************/
 
+.babysitGroup .card:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+
+}
+
+.babysitGroup .modal-footer button:last-child {
+    background-color: #1e5b78;
+    color: #fff;
+}
 
 
 /**********************************/
 
+/*************FAVORITES**********/
+.favorite .saveUser {
+    fill: red;
+}
+
+/**********************************/
+
+
+/*****INDEX******/
+.index .search .card-header {
+    background-color: #1e5b78;
+    color: #fff;
+}
+
+
+.index .input-group {
+    position: relative;
+}
+
+.index .input-group input:focus {
+    z-index: 1;
+}
+
+.index .input-group button {
+    position: absolute;
+    left: 22vw;
+}
+
+.index .searchIcon {
+    fill: #1e5b78;
+    z-index: 100;
+
+}
+
+.index .btn-group a {
+    color: #1e5b78;
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    border-color: #1e5b78 !important;
+
+}
+
+.index .registerButtom a {
+    color: #1e5b78;
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    border-color: #1e5b78 !important;
+}
+
+
+
+
+.index .listDetails .title {
+    color: #1e5b78;
+
+}
+
+.index .listDetails li {
+    font-weight: lighter;
+    border-color: #1e5b78;
+
+}
+
+.index .listDetails ul {
+
+    border-color: #1e5b78;
+}
+
+/*************/
+
 
 footer {
     background-color: #1e5b78;
-
-
-
 
 }

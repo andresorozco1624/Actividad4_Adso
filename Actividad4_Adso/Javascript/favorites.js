@@ -9,7 +9,7 @@ function addBabysits(data) {
         const newBabysit = document.createElement('div');
         newBabysit.classList.add("col-6", "d-flex", "justify-content-between", "containerBabysits");
         newBabysit.innerHTML = `
-            <div class="card mb-3 w-100 " data-bs-toggle="modal" data-bs-target="#staticBackdrop`+ i + `">
+            <div class="card mb-3 w-100 favorite" data-bs-toggle="modal" data-bs-target="#staticBackdrop`+ i + `">
                 <div class="row g-0">
                     <div class="col-4 d-flex align-items-center">
                         <img src="Images/user.jpg" class="img-fluid rounded-start" alt="...">
@@ -188,7 +188,7 @@ function addBabysits(data) {
 
 window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/user");
+    xhr.open("GET", "http://localhost:8080/user/1/favorites");
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -202,8 +202,3 @@ window.addEventListener("load", () => {
     };
 
 })
-
-function getAllBabysit() {
-
-}
-
