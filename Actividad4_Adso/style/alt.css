@@ -412,6 +412,34 @@ thead th {
 /*************/
 
 
+/*********Registro*****************/
+.submit {
+    color: #1e5b78;
+    border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color);
+    border-color: #1e5b78 !important;
+
+}
+
+.register .form-floating label {
+    margin-left: 6px;
+}
+
+/*************/
+
+/********WorkwithUs********/
+
+
+/****************/
+
+
+/*******Aboutus*****/
+.subtitle {
+    color: #333333;
+}
+
+/******************/
+
+
 footer {
     background-color: #1e5b78;
 

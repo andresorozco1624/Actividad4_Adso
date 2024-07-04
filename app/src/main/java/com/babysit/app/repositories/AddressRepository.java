@@ -13,7 +13,10 @@ public interface AddressRepository extends
         JpaRepository<AddressEntity,Long>,
         JpaSpecificationExecutor<AddressEntity> {
 
+    List<AddressEntity> findByCountry(String country);
+
+
     List<AddressEntity> findByState(String state);
 
-
+    List<AddressEntity> findByCity(String city);
 }

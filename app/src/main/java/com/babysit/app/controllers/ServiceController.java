@@ -64,6 +64,8 @@ public class ServiceController {
     }
 
 
+
+
     @GetMapping("/all")
     public  List<ServiceResponseDetailDto> findAllServices(){
         return this.serviceService.findAllServices();

@@ -7,5 +7,7 @@ public enum ServiceState {
     REQUESTED,
     RESERVED,
     IN_PROGRESS,
+
+    CANCELED,
     COMPLETED
 }

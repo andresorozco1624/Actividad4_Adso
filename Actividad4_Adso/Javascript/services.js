@@ -1,12 +1,82 @@
+
+
+var date = document.getElementById("date");
+var duration = document.getElementById("duration");
+var nchildren = document.getElementById("nchildren");
+var indications = document.getElementById("indications");
+var fare = document.getElementById("fare");
+
+
+
+
+
+var all = document.getElementById("all");
+var requested = document.getElementById("requested");
+var reserved = document.getElementById("reserved");
+var inProgress = document.getElementById("inProgress");
+var canceled = document.getElementById("canceled");
+var completed = document.getElementById("completed");
+
+
+const States = Object.freeze({
+    REQUESTED: 'REQUESTED',
+    RESERVED: 'RESERVED',
+    IN_PROGRESS: 'IN_PROGRESS',
+    CANCELED: 'CANCELED',
+    COMPLETED: 'COMPLETED'
+});
+
+
+const url = "http://localhost:8080/service";
+var userId = 1;
+
+
+
 var data;
+
+
+function createObjectService() {
+    var objService = {
+        "date": date.value,
+        "hour": "PT" + duration.value + "H",
+        "nchildren": nchildren.value,
+        "indication": indications.value,
+        "fare": fare.value,
+        "userId": userId
+    };
+    return JSON.stringify(objService);
+}
+
+
+function createService() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    objetjson = createObjectService();
+    console.log(objetjson);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(objetjson);
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            location.reload();
+
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+}
+
 
 function addServices(data) {
 
     //data = JSON.stringify(data);
     const servicesCard = document.querySelector(".servicesCard");
 
+    servicesCard.innerHTML = ``;
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < data.length; i++) {
         const newService = document.createElement('div');
         serviceId = 100000 + data[i].id
         newService.classList.add("card", "border-primary", "mb-3", "ms-2");
@@ -62,9 +132,9 @@ function addServices(data) {
 
 }
 
-window.addEventListener("load", () => {
+all.addEventListener("click", () => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/service/1");
+    xhr.open("GET", url + "/" + userId);
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -77,4 +147,135 @@ window.addEventListener("load", () => {
         }
     };
 
-})
+});
+
+requested.addEventListener("click", () => {
+    console.log("Entre");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId + "/state/" + States.REQUESTED);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            console.log(data);
+            addServices(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+});
+
+window.addEventListener("load", () => {
+    console.log("Entre");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId + "/state/" + States.REQUESTED);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            console.log(data);
+            addServices(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+});
+
+reserved.addEventListener("click", () => {
+    console.log("Entre");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId + "/state/" + States.RESERVED);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            console.log(data);
+            addServices(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+});
+
+inProgress.addEventListener("click", () => {
+    console.log("Entre");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId + "/state/" + States.IN_PROGRESS);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            console.log(data);
+            addServices(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+});
+
+completed.addEventListener("click", () => {
+    console.log("Entre");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId + "/state/" + States.COMPLETED);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            console.log(data);
+            addServices(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+});
+
+canceled.addEventListener("click", () => {
+    console.log("Entre");
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId + "/state/" + States.CANCELED);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            console.log(data);
+            addServices(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+});
+
+(function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                else {
+                    createService();
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})();

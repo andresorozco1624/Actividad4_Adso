@@ -27,16 +27,20 @@
                 <div class="fs-2 title-main">Servicios</div>
                 <div class="row my-3">
                     <nav class="nav align-items-center" style="color: #bebcbc92;">
-                        <a class="nav-link" href="services.html" tabindex="-1" aria-disabled="true"
-                            style="">Solicitados</a>
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" style=""
+                            id="requested">Solicitados</a>
                         |
-                        <a class="nav-link active" aria-current="page" href="#">Reservados</a>
+                        <a class="nav-link active" aria-current="page" href="#" id="reserved">Reservados</a>
                         |
-                        <a class="nav-link" href="#">Activos</a>
+                        <a class="nav-link" href="#" id="inProgress">Activos</a>
                         |
-                        <a class="nav-link" href="#">Cancelados</a>
+                        <a class="nav-link" href="#" id="canceled">Cancelados</a>
                         |
-                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" style="">Historial</a>
+                        <a class="nav-link" href="#" id="completed" tabindex="-1" aria-disabled="true"
+                            style="">Completados</a>
+                        |
+                        <a class="nav-link" href="#" id="all" tabindex="-1" aria-disabled="true" style="">Historial</a>
+
 
                     </nav>
                 </div>
@@ -67,6 +71,7 @@
                         Nueva Solicitud
                     </button>
 
+
                     <hr>
 
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -84,16 +89,22 @@
                                         <div class="row d-flex justify-content-center mb-3 ">
 
                                             <div class="form-floating col-11">
-                                                <input type="datetime-local" class="form-control" name="" id="">
+                                                <input type="datetime-local" class="form-control" name="" id="date"
+                                                    required>
                                                 <label for="">¿Cuando y a qué hora nos necesitas?</label>
+                                                <div class="invalid-feedback">Ingresa la la fecha y hora.
+                                                </div>
                                             </div>
 
                                         </div>
                                         <div class="row d-flex justify-content-center mb-3 ">
                                             <div class="form-floating col-11">
 
-                                                <input type="number" name="" class="form-control" id="">
+                                                <input type="number" name="" class="form-control" id="duration"
+                                                    required>
                                                 <label for="">¿Cuantas horas?</label>
+                                                <div class="invalid-feedback">Ingresa cuantas horas necesitas en el
+                                                    servicio.</div>
                                             </div>
 
 
@@ -101,15 +112,18 @@
 
                                         <div class="row d-flex justify-content-center mb-3 ">
                                             <div class="form-floating col-11">
-                                                <input type="number" name="" class="form-control" id="">
+                                                <input type="number" name="" class="form-control" id="nchildren"
+                                                    required>
                                                 <label for="">¿Cuantos niños son?</label>
+                                                <div class="invalid-feedback">Ingresa el número de niños.</div>
+
 
                                             </div>
 
                                         </div>
                                         <div class="row d-flex justify-content-center mb-3 ">
                                             <div class="form-floating col-11">
-                                                <textarea name="" class="form-control" id=""></textarea>
+                                                <textarea name="" class="form-control" id="indications"></textarea>
                                                 <label for="">Cuentanos tus indicaciones</label>
 
                                             </div>
@@ -119,20 +133,24 @@
                                         <div class="row d-flex justify-content-center mb-3 ">
                                             <div class="form-floating col-11">
 
-                                                <input type="number" name="" class="form-control" id="">
+                                                <input type="number" name="" class="form-control" id="fare" required>
                                                 <label for="">Ofrece una tarifa</label>
+                                                <div class="invalid-feedback">Ingresa una tarifa.</div>
                                             </div>
                                         </div>
 
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Crear</button>
 
-                                    </form>
+                                        </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Crear</button>
-                                </div>
+
+
+                                </form>
                             </div>
+
                         </div>
                     </div>
 

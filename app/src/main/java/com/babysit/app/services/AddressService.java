@@ -15,9 +15,19 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public List<AddressResponseDetailDto> getAddressByState (String state){
+    public List<AddressResponseDetailDto> getAddressByCountry (String country){
 
+        List<AddressEntity> addressEntities = addressRepository.findByCountry(country);
+        return becomeToDtos(addressEntities);
+    }
+
+    public List<AddressResponseDetailDto> getAddressByState(String state) {
         List<AddressEntity> addressEntities = addressRepository.findByState(state);
+        return becomeToDtos(addressEntities);
+    }
+
+    public List<AddressResponseDetailDto> getAddressByCity(String city) {
+        List<AddressEntity> addressEntities = addressRepository.findByCity(city);
         return becomeToDtos(addressEntities);
     }
 
@@ -46,5 +56,7 @@ public class AddressService {
 
         return addressDtos;
     }
+
+
 
 }

@@ -39,135 +39,126 @@
     </header>
 
     <main class="">
-        <div class="col-md-7 col-lg-8 form-register">
-            <h4 class="mb-3 text-center">Registro</h4>
-            <form class="needs-validation" novalidate>
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required />
-                        <div class="invalid-feedback">Ingresa tu nombre.</div>
-                    </div>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-6 form-register py-5">
+                    <p class="mb-3  fs-2 fw-bold">Registro</p>
+                    <form class="needs-validation register" novalidate>
+                        <div class="row g-3">
+                            <div class="form-floating col-6 ">
+                                <input type="text" class="form-control" id="firstName" required>
+                                <label for="">Nombre:</label>
+                                <div class="invalid-feedback">Ingresa tu nombre.</div>
 
-                    <div class="col-sm-6">
-                        <label for="lastName" class="form-label">Apellidos</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required />
-                        <div class="invalid-feedback">Ingresa tus apellidos.</div>
-                    </div>
+                            </div>
 
-                    <div class="col-6">
-                        <label for="email" class="form-label">Correo Electrónico
-                        </label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com" required
-                            autocomplete="off" />
-                        <div class="invalid-feedback" id="emailFeedback">Verifica el correo ingresado</div>
-                    </div>
+                            <div class="form-floating col-6 ">
+                                <input type="text" class="form-control" id="lastName" required />
+                                <label>Apellidos:</label>
+                                <div class="invalid-feedback">Ingresa tus apellidos.</div>
+                            </div>
 
-                    <div class="col-6">
-                        <label for="emailConfirm" class="form-label">Confirmar Correo Electrónico
-                        </label>
-                        <input type="email" class="form-control" id="emailConfirm" placeholder="you@example.com"
-                            required autocomplete="off" />
-                        <div class="invalid-feedback" id="emailConfirmFeedback">Verifica el correo de confirmación</div>
-                    </div>
-
-                    <div class="col-6">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" placeholder="" required
-                            autocomplete="off" />
-                        <div class="invalid-feedback" id="passwordFeedback">Ingresa una Contraseña </div>
-                    </div>
-
-                    <div class="col-6">
-                        <label for="passwordConfirm" class="form-label">Confirmar Contraseña</label>
-                        <input type="password" class="form-control" id="passwordConfirm" placeholder="" required
-                            autocomplete="off" />
-                        <div class="invalid-feedback" id="passwordConfirmFeedback">Confirma la contraseña</div>
-                    </div>
+                            <div class="col-6 form-floating ">
+                                <input type="email" class="form-control" id="email" required autocomplete="off" />
+                                <label for="email" class="form-label">Correo:
+                                </label>
+                                <div class="invalid-feedback" id="emailFeedback">Ingresa un correo valido.</div>
+                            </div>
 
 
-                    <div class="col-6">
-                        <label for="address" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="address" placeholder="Apartamento o Casa"
-                            required />
-                        <div class="invalid-feedback">Ingresa una dirección</div>
-                    </div>
 
-                    <div class="col-6">
-                        <label for="phone" class="form-label">Número Móvil </label>
-                        <input type="number" class="form-control" id="phone" placeholder="302 000 2910" required />
-                        <div class="invalid-feedback">Ingresa un numero movil</div>
-                    </div>
+                            <div class="col-6 form-floating">
+                                <input type="password" class="form-control" id="password" required autocomplete="off" />
+                                <label for="password" class="form-label">Contraseña:</label>
+                                <div class="invalid-feedback" id="passwordFeedback">Ingresa una contraseña. </div>
+                            </div>
 
-                    <div class="col-md-4">
-                        <label for="country" class="form-label">Pais</label>
-                        <select class="form-select" id="country" required>
-                            <option value="">Escoge...</option>
-                            <option>Colombia</option>
-                        </select>
-                        <div class="invalid-feedback">Ingresa un pais</div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <label for="state" class="form-label">Departamento</label>
-                        <select class="form-select" id="state" required>
-                            <option value="">Escoge...</option>
-                            <option>Atlantico</option>
-                            <option>Antioquia</option>
-                            <option>Cundinamarca</option>
-                            <option>Valle Del Cauca</option>
-                            <option>Magdalena</option>
-                            <option>Bogota D.C</option>
 
-                        </select>
-                        <div class="invalid-feedback">Ingresa un departamento.</div>
-                    </div>
 
-                    <div class="col-md-4">
-                        <label for="state" class="form-label">Ciudad</label>
-                        <select class="form-select" id="city" required>
-                            <option value="">Escoge...</option>
-                            <option>Barranquilla</option>
-                            <option>Medellin</option>
-                            <option>Bogota D.C</option>
-                            <option>Cali</option>
-                            <option>Santa Marta</option>
-                            <option>Bogota D.C</option>
+                            <div class="col-6 form-floating">
+                                <input type="text" class="form-control" id="address" required />
+                                <label for="address" class="form-label">Dirección:</label>
+                                <div class="invalid-feedback">Ingresa una dirección</div>
+                            </div>
 
-                        </select>
-                        <div class="invalid-feedback">Ingresa una ciudad.</div>
-                    </div>
+                            <div class="col-6 form-floating">
+                                <input type="number" class="form-control" id="phone" required />
+                                <label>Número Móvil: </label>
+                                <div class="invalid-feedback">Ingresa un numero movil</div>
+                            </div>
 
-                    <div class="col-6">
-                        <label class="form-label">Perfil</label>
-                        <div class="form-check">
-                            <input id="clientProfile" type="radio" name="flexRadioDefault" class="form-check-input"
-                                checked="" required>
-                            <label class="form-check-label" for="client">Cliente</label>
+                            <div class="col-4 form-floating">
+                                <select class="form-select" id="country" required>
+                                    <option value=""></option>
+                                </select>
+                                <label for="country" class="form-label">Pais:</label>
+
+                                <div class="invalid-feedback">Ingresa un pais</div>
+                            </div>
+
+                            <div class="col-4 form-floating">
+                                <select class="form-select" id="state" disabled required>
+                                    <option value=""></option>
+                                </select>
+                                <label for="state" class="form-label">Departamento:</label>
+
+                                <div class="invalid-feedback">Ingresa un departamento.</div>
+                            </div>
+
+                            <div class="col-md-4 form-floating">
+
+                                <select class="form-select" id="city" disabled required>
+                                    <option value=""></option>
+                                </select>
+                                <label for="state" class="form-label">Ciudad:</label>
+                                <div class="invalid-feedback">Ingresa una ciudad.</div>
+                            </div>
+
+                            <div class="col-6 form-floating">
+                                <select class="form-select" id="rolSelect" required>
+                                    <option selected></option>
+                                    <option>Cliente</option>
+                                    <option>Niñera</option>
+                                </select>
+                                <label for="">¿Cúal será tu rol?</label>
+                                <div class="invalid-feedback">Ingresa un rol.</div>
+                            </div>
+                            <div class="col-6 form-floating" id="ageContainer">
+                                <input type="number" class="form-control" id="age" required />
+                                <label>Edad: </label>
+                                <div class="invalid-feedback">Ingresa una edad valida</div>
+                            </div>
+                            <div class="col-3 form-floating" id="babysitFare" hidden>
+                                <input type="number" class="form-control" id="fare" required />
+                                <label>Precio / hora: </label>
+                                <div class="invalid-feedback">Ingresa un precio correcto</div>
+                            </div>
+
+
+                            <div class="col-12 form-floating">
+
+                                <input type="text" class="form-control" style="height: 100px;" id="description"
+                                    required />
+                                <label for="description" class="form-label">Cuentanos sobre ti:</label>
+                                <div class="invalid-feedback">Ingresa una description de lo que buscas</div>
+                            </div>
+
+                            <div class="d-flex justify-content-center ">
+                                <button class=" btn btn-lg submit fw-bold" type="submit">
+                                    Resgistrar
+                                </button>
+                            </div>
+
+
+
                         </div>
-                        <div class="form-check">
-                            <input id="babysit" type="radio" name="flexRadioDefault" class="form-check-input" required>
-                            <label class="form-check-label" for="babysit">Niñera</label>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="description" class="form-label">Describe lo que buscas</label>
-                        <input type="text" class="form-control" style="height: 100px;" id="description" placeholder=""
-                            required />
-                        <div class="invalid-feedback">Ingresa una description de lo que buscas</div>
-                    </div>
-
-                    <div class="d-flex justify-content-center"><button class="w-50 btn btn-lg btn-primary"
-                            type="submit">
-                            Resgistrar
-                        </button></div>
-
-
+                    </form>
 
                 </div>
-            </form>
+            </div>
         </div>
+
     </main>
 
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-0  sticky-top">

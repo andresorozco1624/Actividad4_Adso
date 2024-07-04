@@ -25,57 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-(function () {
-    correo = document.getElementById("correo");
-    correoInfo = document.getElementById("correoInfo");
-
-    phone = document.getElementById("phone");
-    phoneInfo = document.getElementById("phoneInfo");
-
-    address = document.getElementById("address");
-    addressInfo = document.getElementById("addressInfo");
-
-    correo.addEventListener('mouseover', () => {
-        correo.classList.add('nofija');
-        correoInfo.classList.remove('nofija');
-        correoInfo.classList.add('fija');
-
-    })
-
-    correoInfo.addEventListener('mouseleave', () => {
-        correo.classList.remove('nofija');
-        correoInfo.classList.add('nofija');
-        correoInfo.classList.remove('fija');
-    })
-
-    phone.addEventListener('mouseover', () => {
-        phone.classList.add('nofija');
-        phoneInfo.classList.remove('nofija');
-        phoneInfo.classList.add('fija');
-
-    })
-
-    phoneInfo.addEventListener('mouseleave', () => {
-        phone.classList.remove('nofija');
-        phoneInfo.classList.add('nofija');
-        phoneInfo.classList.remove('fija');
-    })
-
-
-    address.addEventListener('mouseover', () => {
-        address.classList.add('nofija');
-        addressInfo.classList.remove('nofija');
-        addressInfo.classList.add('fija');
-
-    })
-
-    addressInfo.addEventListener('mouseleave', () => {
-        address.classList.remove('nofija');
-        addressInfo.classList.add('nofija');
-        addressInfo.classList.remove('fija');
-    })
-
-}())
 
 
 
