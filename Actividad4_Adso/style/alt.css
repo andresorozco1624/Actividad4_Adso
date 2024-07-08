@@ -437,6 +437,12 @@ thead th {
     color: #333333;
 }
 
+.aboutus img {
+
+    clip-path: circle(50%);
+    /* Gradiente de transparencia */
+}
+
 /******************/
 
 

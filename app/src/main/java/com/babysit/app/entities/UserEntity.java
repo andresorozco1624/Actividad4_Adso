@@ -31,6 +31,9 @@ public class UserEntity {
     @Column(name = "last_name", columnDefinition = "varchar(15)", nullable = false)
     private String lastName;
 
+    @Column(name = "noidentification", columnDefinition = "varchar(30)", nullable = false)
+    private String noIdentification;
+
     @Column(name = "phone", columnDefinition = "varchar(10)", nullable = false, unique = true)
     private String phone;
 
@@ -39,6 +42,15 @@ public class UserEntity {
 
     @Column(name = "password", columnDefinition = "varchar(50)", nullable = false)
     private String password;
+
+    @Column(name = "ubication", columnDefinition = "varchar(50)", nullable = false)
+    private String ubication;
+
+    @Column(name = "age", columnDefinition = "varchar(10)", nullable = false)
+    private String age;
+
+    @Column(name = "fare")
+    private Long fare;
 
 
 

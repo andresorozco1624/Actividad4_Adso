@@ -11,14 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class UserRequestCreateDto {
-
-    private Long id;
     private String firstName;
     private String lastName;
-    private String phone;
+    private String noIdentification;
+    private Long identification;
     private String email;
-    private String description;
-    private AddressEntity address;
     private String password;
+    private String ubication;
+    private String phone;
+    private Long address;
     private Long rol;
+    private String age;
+    private Long fare;
+    private String description;
 }

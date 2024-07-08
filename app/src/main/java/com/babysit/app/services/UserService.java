@@ -2,7 +2,10 @@ package com.babysit.app.services;
 
 
 import com.babysit.app.contracts.*;
+import com.babysit.app.entities.AddressEntity;
 import com.babysit.app.entities.UserEntity;
+import com.babysit.app.repositories.AddressRepository;
+import com.babysit.app.repositories.IdentificationRepository;
 import com.babysit.app.repositories.RolRepository;
 import com.babysit.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,14 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
     private RolRepository rolRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private IdentificationRepository identificationRepository;
 
     public List<UserResponseDetailDto> getAllUsers(){
         List<UserEntity> entities = this.repository.findAll();
@@ -93,13 +103,19 @@ public class UserService {
     public UserEntity becomeToEntityCreate (UserRequestCreateDto dto){
         UserEntity entity = new UserEntity();
         entity.setFirstName(dto.getFirstName());
+        entity.setNoIdentification(dto.getNoIdentification());
+        entity.setIdentification(this.identificationRepository.findById(dto.getIdentification()).get());
         entity.setLastName(dto.getLastName());
-        entity.setAddress(dto.getAddress());
         entity.setEmail(dto.getEmail());
         entity.setPassword(dto.getPassword());
+        entity.setUbication(dto.getUbication());
         entity.setPhone(dto.getPhone());
+        AddressEntity addressEntity = this.addressRepository.findById(dto.getAddress()).get();
+        entity.setAddress(addressEntity);
+        entity.setRol(this.rolRepository.findById(dto.getRol()).get());
+        entity.setAge(dto.getAge());
+        entity.setFare(dto.getFare());
         entity.setDescription(dto.getDescription());
-        entity.setRol(this.rolRepository.getReferenceById(dto.getId()));
         return entity;
 
     }

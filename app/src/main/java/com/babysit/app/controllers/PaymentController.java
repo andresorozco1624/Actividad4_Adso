@@ -43,4 +43,9 @@ public class PaymentController {
         return this.paymentService.findUserPayment(userId);
     }
 
+    @GetMapping("/{userId}/state/{state}")
+    public List<PaymentResponseDetailDto> findByUserAndState(@PathVariable("userId") Long userId , @PathVariable("state") String state) {
+        return this.paymentService.findByUserAndState(userId,state);
+    }
+
 }

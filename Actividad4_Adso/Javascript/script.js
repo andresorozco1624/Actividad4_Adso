@@ -1,18 +1,20 @@
 var firstName = document.getElementById("firstName");
 var lastName = document.getElementById("lastName");
+var identification = document.getElementById("idSelect");
+var noIdentification = document.getElementById("noIdentification");
 var email = document.getElementById("email");
 var password = document.getElementById("password");
-var address = document.getElementById("address");
+var ubication = document.getElementById("ubication");
 var phone = document.getElementById("phone");
 var country = document.getElementById("country");
 var state = document.getElementById("state");
 var city = document.getElementById("city");
 var description = document.getElementById("description");
-var profile = document.getElementById("clientProfile");
 var babysitFare = document.getElementById("babysitFare");
 var rolSelect = document.getElementById("rolSelect");
 var age = document.getElementById("age");
 var ageContainer = document.getElementById("ageContainer");
+var fare = document.getElementById("fare");
 
 
 
@@ -20,14 +22,16 @@ function createObjUser() {
     var objUser = {
         "firstName": firstName.value,
         "lastName": lastName.value,
+        "identification": identification.selectedIndex,
+        "noIdentification": noIdentification.value,
         "email": email.value,
         "password": password.value,
-        "address": address.value,
+        "ubication": ubication.value,
         "phone": phone.value,
-        "country": country.value,
-        "state": state.value,
-        "city": city.value,
-        "profile": profile.value,
+        "address": findIdAdrress(),
+        "rol": rolSelect.selectedIndex,
+        "age": age.value,
+        "fare": fare.value,
         "description": description.value,
 
     };
@@ -56,19 +60,46 @@ function createUser() {
 
 }
 
+
+function findIdAdrress() {
+    for (i = 0; i < data.length; i++) {
+        if (data[i].city == city.value) {
+            return data[i].id;
+        }
+    }
+}
+
 rolSelect.addEventListener("change", () => {
 
     if (rolSelect.value == "Niñera") {
         babysitFare.hidden = false;
-        ageContainer.classList.remove("col-6");
-        ageContainer.classList.add("col-3");
+        fare.required = true;
+
+        try {
+            ageContainer.classList.remove("col-6");
+            ageContainer.classList.add("col-3");
+
+        } catch (error) {
+
+        }
+
 
 
     }
     else {
         babysitFare.hidden = true;
-        ageContainer.classList.remove("col-3");
-        ageContainer.classList.add("col-6");
+        fare.required = false;
+        fare.value = "";
+        try {
+
+            ageContainer.classList.remove("col-3");
+            ageContainer.classList.add("col-6");
+
+        } catch (error) {
+
+        }
+
+
     }
 });
 

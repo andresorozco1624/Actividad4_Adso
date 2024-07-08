@@ -1,6 +1,7 @@
 package com.babysit.app.repositories;
 
 import com.babysit.app.entities.PaymentEntity;
+import com.babysit.app.entities.UserEntity;
 import com.babysit.app.utils.PaymentState;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -14,4 +15,7 @@ public interface PaymentRepository extends
         JpaSpecificationExecutor<PaymentEntity> {
 
     List<PaymentEntity> findByState (PaymentState paymentState);
+
+
+    PaymentEntity findByIdAndState(Long id, PaymentState paymentState);
 }

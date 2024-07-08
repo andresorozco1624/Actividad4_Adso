@@ -149,7 +149,7 @@ function addBabysits(data) {
                             <div class="row d-flex justify-content-center mb-3 ">
                                 <div class="form-floating col-11">
 
-                                    <input type="number" name="" class="form-control" id="">
+                                    <input type="number" name="" class="form-control" id="" disabled>
                                     <label for="">Ofrece una tarifa</label>
                                 </div>
                             </div>

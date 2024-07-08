@@ -94,4 +94,29 @@ public class PaymentService {
         }
         return becomeToDto(paymentEntities);
     }
+
+    public List<PaymentResponseDetailDto> findByUserAndState(Long userId, String state) {
+
+        UserEntity userEntity = this.userRepository.findById(userId).get();
+
+        PaymentState paymentState = PaymentState.valueOf(state);
+
+        List<ServiceEntity> serviceEntities = this.serviceRepository.findByUser(userEntity);
+        List<PaymentEntity> paymentEntities = new ArrayList<>();
+        for (int i=0; i < serviceEntities.size(); i++){
+
+            if (serviceEntities.get(i).getPagoId() != null){
+                PaymentEntity paymentEntity = serviceEntities.get(i).getPagoId();
+                PaymentEntity paymentFiltrate = this.paymentRepository.findByIdAndState(paymentEntity.getId(), paymentState);
+                if (paymentFiltrate != null){
+                    paymentEntities.add(paymentFiltrate);
+                }
+
+            }
+
+
+        }
+
+        return becomeToDto(paymentEntities);
+    }
 }
