@@ -47,12 +47,12 @@
                         <h1 class="mb-3 fs-2 title-main text-start">Ingrese:</h1>
 
                         <div class="form-floating mt-4">
-                            <input type="email" class="form-control" id="floatingInput" required />
+                            <input type="email" class="form-control" id="email" required />
                             <label for="floatingInput">Correo:</label>
                             <div class="invalid-feedback text-start">Ingrese su correo.</div>
                         </div>
                         <div class="form-floating mt-3">
-                            <input type="password" class="form-control" id="floatingPassword" required />
+                            <input type="password" class="form-control" id="password" required />
                             <label for="floatingPassword">Contraseña:</label>
                             <div for="" class="invalid-feedback text-start">Ingrese su contraseña.</div>
                         </div>
@@ -78,7 +78,11 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <script src="Javascript/script.js"></script>
+    <script type='text/javascript'>
+        window.glob = "global variable"; 
+    </script>
+
+
     <script src="Javascript/footer.js"></script>
     <script src="Javascript/header.js"></script>
     <script src="Javascript/login.js"></script>

@@ -72,6 +72,7 @@ window.addEventListener("load", () => {
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             data = xhr.response;
+
             console.log(data);
             addServices(data);
         } else {

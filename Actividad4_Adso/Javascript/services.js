@@ -168,11 +168,12 @@ requested.addEventListener("click", () => {
 });
 
 window.addEventListener("load", () => {
-    console.log("Entre");
+
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.REQUESTED);
     xhr.send();
     xhr.responseType = "json";
+
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             data = xhr.response;

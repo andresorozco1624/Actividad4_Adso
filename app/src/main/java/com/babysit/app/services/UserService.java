@@ -46,7 +46,7 @@ public class UserService {
     }
     
     public String createUser (UserRequestCreateDto dto){
-        UserEntity entity = new UserEntity();
+
         this.repository.save(becomeToEntityCreate(dto));
         return "El usuario ha sido creado de manera exitosa";
     }

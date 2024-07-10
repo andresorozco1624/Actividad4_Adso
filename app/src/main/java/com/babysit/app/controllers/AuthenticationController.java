@@ -1,23 +1,30 @@
 package com.babysit.app.controllers;
 
-import com.babysit.app.contracts.AuthenticationRequestDto;
+import com.babysit.app.contracts.AuthenticationRequestLoginDto;
+import com.babysit.app.contracts.AuthenticationRequestRegisterDto;
 import com.babysit.app.contracts.AuthenticationResponseDto;
+import com.babysit.app.services.AuthenticationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-    @GetMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponseDto> login (
-            @RequestBody @Validated AuthenticationRequestDto authenticationRequestDto
-    ){
+    @Autowired
+    private AuthenticationService authService;
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponseDto> login(
+            @RequestBody AuthenticationRequestLoginDto requestLoginDto
+            ){
+        return  ResponseEntity.ok(authService.login(requestLoginDto));
+    }
 
-        return null;
+    @PostMapping("/register")
+    public  ResponseEntity<AuthenticationResponseDto> register (
+            @RequestBody AuthenticationRequestRegisterDto requestRegisterDto
+            ){
+        return  ResponseEntity.ok(authService.register(requestRegisterDto));
     }
 }
