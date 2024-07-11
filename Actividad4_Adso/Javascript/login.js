@@ -1,14 +1,16 @@
 
 
-var email = document.getElementById("email");
+var username = document.getElementById("username");
 var password = document.getElementById("password");
+var data;
+var sentInfo;
 
 /* Form Submission Protocol: This doesn't allow to submit the form, if it is empty */
 
 function createObjUser() {
     var objUser = {
-        "email": email.value,
-        "password": password.value,
+        "username": "78687665",
+        "password": "1234",
     };
 
     return JSON.stringify(objUser);
@@ -16,25 +18,23 @@ function createObjUser() {
 }
 
 function login() {
-
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/login");
+    xhr.open("POST", "http://localhost:8080/auth/login");
     objetjson = createObjUser();
     xhr.setRequestHeader("Content-Type", "application/json");
+    console.log(objetjson);
     xhr.send(objetjson);
     xhr.onload = () => {
 
         if (xhr.readyState == 4 && xhr.status == 200) {
-            const data = xhr.response;
-            alert(data);
-            if (data != "services.html") {
-                window.location.href = "login.html";
-            }
-            else {
-                window.location.href = "services.html";
-            }
+            data = xhr.response;
+            data = JSON.parse(data);
+            localStorage.setItem("token", data.jwt)
+            window.location.href = "services.html";
+
+
         } else {
-            alert("No funcina");
+            window.location.href = "login.html";
             console.log(`Error: ${xhr.status}`);
         }
     };
@@ -73,11 +73,17 @@ function logout() {
                     event.stopPropagation()
                 }
                 else {
+                    alert("Hola");
+                    event.preventDefault()
+                    event.stopPropagation()
                     login();
-
                 }
 
                 form.classList.add('was-validated')
             }, false)
         })
 })();
+
+
+
+

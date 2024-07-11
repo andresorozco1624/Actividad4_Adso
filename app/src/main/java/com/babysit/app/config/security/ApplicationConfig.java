@@ -2,6 +2,7 @@ package com.babysit.app.config.security;
 
 import com.babysit.app.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class ApplicationConfig {
 
+    @Autowired
     private UserRepository userRepository;
 
     @Bean

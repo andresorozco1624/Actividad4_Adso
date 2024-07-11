@@ -48,7 +48,7 @@ public class UserEntity implements UserDetails {
     @Column(name = "email", columnDefinition = "varchar(30)", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", columnDefinition = "varchar(50)", nullable = false)
+    @Column(name = "password", columnDefinition = "varchar(250)", nullable = false)
     private String password;
 
     @Column(name = "ubication", columnDefinition = "varchar(50)", nullable = false)
@@ -105,10 +105,7 @@ public class UserEntity implements UserDetails {
         return List.of(new SimpleGrantedAuthority(rol.getTitle()));
     }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
+
 
     @Override
     public boolean isAccountNonExpired() {

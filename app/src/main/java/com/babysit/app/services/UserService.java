@@ -8,7 +8,9 @@ import com.babysit.app.repositories.AddressRepository;
 import com.babysit.app.repositories.IdentificationRepository;
 import com.babysit.app.repositories.RolRepository;
 import com.babysit.app.repositories.UserRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -140,5 +142,13 @@ public class UserService {
            userResponse.add(becomeToDto(favoritesbabysits.get(i)));
        }
        return userResponse;
+    }
+
+    public UserResponseDetailDto getCurrentUser(Authentication authentication) {
+        return becomeAuthenticationToDto((UserEntity) authentication.getPrincipal());
+    }
+
+    private UserResponseDetailDto becomeAuthenticationToDto(UserEntity userEntity) {
+        return becomeToDto(userEntity);
     }
 }

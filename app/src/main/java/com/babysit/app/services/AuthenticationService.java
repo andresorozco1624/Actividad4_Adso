@@ -14,6 +14,10 @@ import com.babysit.app.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -38,8 +42,20 @@ public class AuthenticationService {
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public AuthenticationResponseDto login(AuthenticationRequestLoginDto requestLoginDto) {
-        return null;
+
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestLoginDto.getUsername(),requestLoginDto.getPassword()));
+        UserDetails userDetails = userRepository.findByUsername(requestLoginDto.getUsername()).orElseThrow();
+        String token = jwtService.getToken(userDetails);
+        return AuthenticationResponseDto.builder()
+                .jwt(token)
+                .build();
     }
 
     public AuthenticationResponseDto register(AuthenticationRequestRegisterDto requestRegisterDto) {
@@ -57,7 +73,7 @@ public class AuthenticationService {
                             + requestRegisterDto.getLastName().substring(0,0)
                             + requestRegisterDto.getNoIdentification())
                 .email(requestRegisterDto.getEmail())
-                .password(requestRegisterDto.getPassword())
+                .password(passwordEncoder.encode(requestRegisterDto.getPassword()))
                 .ubication(requestRegisterDto.getUbication())
                 .phone(requestRegisterDto.getPhone())
                 .address(adrressEntity)

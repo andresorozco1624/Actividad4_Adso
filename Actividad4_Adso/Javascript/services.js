@@ -135,6 +135,7 @@ function addServices(data) {
 all.addEventListener("click", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -147,12 +148,15 @@ all.addEventListener("click", () => {
         }
     };
 
+
 });
 
 requested.addEventListener("click", () => {
     console.log("Entre");
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.REQUESTED);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -171,6 +175,8 @@ window.addEventListener("load", () => {
 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.REQUESTED);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
 
@@ -190,6 +196,8 @@ reserved.addEventListener("click", () => {
     console.log("Entre");
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.RESERVED);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -208,6 +216,8 @@ inProgress.addEventListener("click", () => {
     console.log("Entre");
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.IN_PROGRESS);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -226,6 +236,8 @@ completed.addEventListener("click", () => {
     console.log("Entre");
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.COMPLETED);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -244,6 +256,8 @@ canceled.addEventListener("click", () => {
     console.log("Entre");
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.CANCELED);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {

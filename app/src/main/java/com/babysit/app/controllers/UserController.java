@@ -5,6 +5,8 @@ import com.babysit.app.contracts.UserRequestEditDto;
 import com.babysit.app.contracts.UserResponseDetailDto;
 import com.babysit.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,6 +54,14 @@ public class UserController {
     @GetMapping("/{userId}/favorites")
     public List <UserResponseDetailDto> getFavoritesBabysits(@PathVariable("userId") Long userId){
         return this.service.findFavoritesBabysit(userId);
+    }
+
+
+    @GetMapping("/currentUser")
+    public UserResponseDetailDto getCurrentUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserResponseDetailDto userResponse = this.service.getCurrentUser(authentication);
+        return userResponse;
     }
 
 }
