@@ -36,6 +36,8 @@ public class HttpSecurityConfig {
                 .authorizeHttpRequests(authRequest->
                         authRequest
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/user/babysits").permitAll()
+                                
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager->

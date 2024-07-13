@@ -3,6 +3,7 @@ package com.babysit.app.services;
 
 import com.babysit.app.contracts.*;
 import com.babysit.app.entities.AddressEntity;
+import com.babysit.app.entities.RolEntity;
 import com.babysit.app.entities.UserEntity;
 import com.babysit.app.repositories.AddressRepository;
 import com.babysit.app.repositories.IdentificationRepository;
@@ -30,6 +31,8 @@ public class UserService {
 
     @Autowired
     private IdentificationRepository identificationRepository;
+
+
 
     public List<UserResponseDetailDto> getAllUsers(){
         List<UserEntity> entities = this.repository.findAll();
@@ -150,5 +153,17 @@ public class UserService {
 
     private UserResponseDetailDto becomeAuthenticationToDto(UserEntity userEntity) {
         return becomeToDto(userEntity);
+    }
+
+    public List<UserResponseDetailDto> getAllBabysits(Long rolId) {
+        RolEntity rolEntity  = this.rolRepository.findById(rolId).get();
+
+        List<UserEntity> entities = this.repository.findByRol(rolEntity);
+        List<UserResponseDetailDto> dtos= new ArrayList<>();
+        for (int i=0;i < entities.size();i++){
+            UserEntity entity = entities.get(i);
+            dtos.add(becomeToDto(entity));
+        }
+        return dtos;
     }
 }

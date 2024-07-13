@@ -25,6 +25,12 @@ public class UserController {
         return this.service.getAllUsers();
     }
 
+    @GetMapping("/babysits")
+    public  List <UserResponseDetailDto> getAllBabysits(){
+        Long rolId = 2L;
+        return this.service.getAllBabysits(rolId);
+    }
+
     @GetMapping("/{id}")
     public UserResponseDetailDto getUserById(@PathVariable("id") Long id){
         return this.service.getUserById(id);

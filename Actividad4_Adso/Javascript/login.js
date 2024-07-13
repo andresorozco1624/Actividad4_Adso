@@ -9,7 +9,7 @@ var sentInfo;
 
 function createObjUser() {
     var objUser = {
-        "username": "78687665",
+        "username": "1004380308",
         "password": "1234",
     };
 

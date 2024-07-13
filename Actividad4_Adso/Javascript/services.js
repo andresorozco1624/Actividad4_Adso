@@ -28,12 +28,12 @@ const States = Object.freeze({
 
 
 const url = "http://localhost:8080/service";
-var userId = 1;
+
 
 
 
 var data;
-
+var userData;
 
 function createObjectService() {
     var objService = {
@@ -174,7 +174,7 @@ requested.addEventListener("click", () => {
 window.addEventListener("load", () => {
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", url + "/" + userId + "/state/" + States.REQUESTED);
+    xhr.open("GET", "http://localhost:8080/user/currentUser");
     xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
 
     xhr.send();
@@ -182,11 +182,20 @@ window.addEventListener("load", () => {
 
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            data = xhr.response;
-            console.log(data);
-            addServices(data);
-        } else {
+            userData = xhr.response;
+            localStorage.setItem("dataUser", JSON.stringify(userData));
+            userId = userData.id;
+
+            getAllRequested();
+
+
+        }
+        else if (xhr.status == 403) {
+            window.location.href = "login.html";
+        }
+        else {
             console.log(`Error: ${xhr.status}`);
+
         }
     };
 
@@ -294,3 +303,23 @@ canceled.addEventListener("click", () => {
             }, false)
         })
 })();
+
+
+function getAllRequested() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId + "/state/" + States.REQUESTED);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+    xhr.send();
+    xhr.responseType = "json";
+
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            console.log(data);
+            addServices(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+}

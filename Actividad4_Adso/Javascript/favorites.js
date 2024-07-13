@@ -1,5 +1,5 @@
 var data;
-
+var userId;
 function addBabysits(data) {
 
     //data = JSON.stringify(data);
@@ -188,7 +188,34 @@ function addBabysits(data) {
 
 window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/user/1/favorites");
+    xhr.open("GET", "http://localhost:8080/user/currentUser");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+    xhr.send();
+    xhr.responseType = "json";
+
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            userId = data.id;
+            getAll();
+        }
+        else if (xhr.status == 403) {
+            window.location.href = "login.html";
+        }
+        else {
+
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+})
+
+function getAll() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/user/" + userId + "/favorites");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -200,5 +227,4 @@ window.addEventListener("load", () => {
             console.log(`Error: ${xhr.status}`);
         }
     };
-
-})
+}

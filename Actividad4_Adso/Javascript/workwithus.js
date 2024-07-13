@@ -67,6 +67,7 @@ function addServices(data) {
 window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -75,7 +76,11 @@ window.addEventListener("load", () => {
 
             console.log(data);
             addServices(data);
-        } else {
+        }
+        else if (xhr.status == 403) {
+            window.location.href = "login.html";
+        }
+        else {
             console.log(`Error: ${xhr.status}`);
         }
     };

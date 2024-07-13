@@ -189,7 +189,7 @@ function addBabysits(data) {
 
 window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/user");
+    xhr.open("GET", "http://localhost:8080/user/babysits");
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -197,6 +197,7 @@ window.addEventListener("load", () => {
             data = xhr.response;
             console.log(data);
             addBabysits(data);
+
         } else {
             console.log(`Error: ${xhr.status}`);
         }

@@ -1,6 +1,6 @@
 var data;
 
-var userId = 1;
+
 var url = "http://localhost:8080/payment";
 
 var all = document.getElementById("all");
@@ -8,6 +8,7 @@ var pending = document.getElementById("pending");
 var inProgress = document.getElementById("inProgress");
 var paid = document.getElementById("paid");
 var failed = document.getElementById("canceled");
+var userId;
 
 const States = Object.freeze({
     PENDING: 'PENDING',
@@ -64,26 +65,35 @@ all.addEventListener("click", () => {
 
 })
 
-/*window.addEventListener("load", () => {
+window.addEventListener("load", () => {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", url + "/" + userId);
+    xhr.open("GET", "http://localhost:8080/user/currentUser");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
+
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             data = xhr.response;
-            //console.log(data);
-            showPayments(data);
-        } else {
+            userId = data.id;
+            getAll();
+        }
+        else if (xhr.status == 403) {
+            window.location.href = "login.html";
+        }
+        else {
+
             console.log(`Error: ${xhr.status}`);
         }
     };
 
-})*/
+})
 
 paid.addEventListener("click", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.PAID);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -101,6 +111,7 @@ paid.addEventListener("click", () => {
 pending.addEventListener("click", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.PENDING);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -118,6 +129,8 @@ pending.addEventListener("click", () => {
 inProgress.addEventListener("click", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.IN_PROGRESS);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -135,6 +148,8 @@ inProgress.addEventListener("click", () => {
 failed.addEventListener("click", () => {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url + "/" + userId + "/state/" + States.FAILED);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
     xhr.send();
     xhr.responseType = "json";
     xhr.onload = () => {
@@ -148,3 +163,21 @@ failed.addEventListener("click", () => {
     };
 
 })
+
+function getAll() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url + "/" + userId);
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+            //console.log(data);
+            showPayments(data);
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+}

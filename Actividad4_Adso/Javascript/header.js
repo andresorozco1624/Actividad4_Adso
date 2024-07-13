@@ -1,3 +1,20 @@
+
+
+
+
+
+
+try {
+
+    var userName = localStorage.getItem("dataUser");
+    userName = JSON.parse(userName).firstName;
+
+} catch (error) {
+    var userName = '';
+}
+
+
+
 /* this function allows the header and footer to be dynamic".*/
 (function () {
     const header = document.querySelector("header");
@@ -60,7 +77,7 @@
                         class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle justify-content-center "
                         id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                        <span class="userName">Andrés O</span>
+                        <span class="userName"> `+ userName + `</span>
                     </a>
                     <ul class="dropdown-menu menu-profile text-small shadow  " aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="myaccount.html">Mi cuenta</a></li>
@@ -79,3 +96,4 @@
         </nav>`;
 
 }());
+
