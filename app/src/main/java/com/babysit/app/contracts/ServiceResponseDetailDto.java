@@ -18,5 +18,8 @@ public class ServiceResponseDetailDto {
     private Duration hour;
     private ServiceState state;
     private String indication;
+    private String babysitName;
+    private String clientName;
+    private Long noChildren;
 
 }

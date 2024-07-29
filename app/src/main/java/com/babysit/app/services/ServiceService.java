@@ -37,7 +37,9 @@ public class ServiceService {
         serviceEntity.setDate(serviceDto.getDate());
         serviceEntity.setHour(serviceDto.getHour());
         serviceEntity.setState(ServiceState.REQUESTED);
+        serviceEntity.setNoChildren(serviceDto.getNoChildren());
         serviceEntity.setUser(userRepository.getReferenceById(serviceDto.getUserId()));
+        serviceEntity.setBabysit(userRepository.getReferenceById(serviceDto.getBabysitId()));
         serviceEntity.setIndication(serviceDto.getIndication());
         this.serviceRepository.save(serviceEntity);
 
@@ -87,8 +89,15 @@ public class ServiceService {
 
     public List<ServiceResponseDetailDto> getServicesByUserAndState (Long userId,String state){
         ServiceState serviceState = ServiceState.valueOf(state);
-        UserEntity userEntity = this.userRepository.getReferenceById(userId);
-        return becomeToDto(this.serviceRepository.findByUserAndState(userEntity,serviceState));
+        UserEntity userEntity = this.userRepository.findById(userId).get();
+
+        if (userEntity.getRol().getTitle().equals("CLIENT")){
+            return becomeToDto(this.serviceRepository.findByUserAndState(userEntity,serviceState));
+        }
+        else {
+            return becomeToDto(this.serviceRepository.findByBabysitAndState(userEntity,serviceState));
+        }
+
     }
 
     public List<ServiceResponseDetailDto> findAllServices() {
@@ -109,6 +118,14 @@ public class ServiceService {
             serviceResponse.setFare(serviceEntity.getFare());
             serviceResponse.setId(serviceEntity.getId());
             serviceResponse.setState(serviceEntity.getState());
+            if(serviceEntity.getBabysit()!= null){
+                serviceResponse.setBabysitName(serviceEntity.getBabysit().getFirstName());
+            }
+            serviceResponse.setClientName(serviceEntity.getUser().getFirstName());
+
+                serviceResponse.setNoChildren(serviceEntity.getNoChildren());
+
+
             serviceResponseDetailDtos.add(serviceResponse);
 
         }

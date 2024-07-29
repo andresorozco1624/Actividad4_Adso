@@ -26,6 +26,9 @@ public class ServiceEntity {
     @Column(name = "fare",nullable = false)
     private double fare;
 
+    @Column(name = "noChildren", nullable = false)
+    private long noChildren;
+
     @Column(name = "date",nullable = false)
     private LocalDateTime date;
 
@@ -40,12 +43,11 @@ public class ServiceEntity {
     @Column(name = "indication")
     private String indication;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user", nullable = false)
     private UserEntity user;
 
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "fk_babysitId")
     private UserEntity babysit;

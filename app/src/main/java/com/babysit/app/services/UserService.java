@@ -99,6 +99,9 @@ public class UserService {
                         .id(userEntity.getRol().getId())
                         .title(userEntity.getRol().getTitle())
                 .build());
+        userDto.setAge(userEntity.getAge());
+        userDto.setFare(userEntity.getFare());
+
 
 
         return userDto;

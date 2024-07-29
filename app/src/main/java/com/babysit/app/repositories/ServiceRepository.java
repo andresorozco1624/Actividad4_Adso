@@ -22,4 +22,6 @@ public interface ServiceRepository extends
 
 
     List<ServiceEntity> findByUser(UserEntity userEntity);
+
+    List<ServiceEntity> findByBabysitAndState(UserEntity userEntity, ServiceState serviceState);
 }

@@ -21,6 +21,7 @@ public class ServiceRequestCreateDto {
     private Duration hour;
     private ServiceState state;
     private String indication;
+    private Long noChildren;
     private Long userId;
     private Long babysitId;
     private Long pagoId;

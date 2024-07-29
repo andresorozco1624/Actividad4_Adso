@@ -41,6 +41,15 @@ header .nav-item .active {
     color: #fff;
 }
 
+.btnLogin,
+.btnRegister {
+    background-color: #fff;
+    border: none;
+    color: #1e5b78;
+    font-weight: light;
+
+}
+
 
 
 
@@ -48,6 +57,11 @@ header .nav-item .active {
 .menu-profile {
 
     margin-left: 8.9vw;
+}
+
+.btn-group a {
+    text-decoration: none;
+
 }
 
 
@@ -237,7 +251,7 @@ thead th {
 .servicesCard .card {
     width: 32vw;
     max-width: 90vw;
-    max-height: 50vh;
+
 }
 
 .servicesGroup .btNewService svg:last-child {
@@ -297,7 +311,7 @@ thead th {
 .containerBabysits .card-text {
     font-size: 0.8em;
     height: 10.3vh;
-    overflow: hidden;
+
 
 }
 

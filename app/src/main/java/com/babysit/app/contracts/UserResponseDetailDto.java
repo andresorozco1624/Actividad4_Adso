@@ -18,6 +18,8 @@ public class UserResponseDetailDto {
     private String phone;
     private String email;
     private String description;
+    private String age;
+    private Long fare;
     private AddressResponseDetailDto address;
     private RolResponseDetailDto rol;
 }

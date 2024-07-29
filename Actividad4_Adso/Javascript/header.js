@@ -1,12 +1,12 @@
 
 
 
-
+var userName;
 
 
 try {
 
-    var userName = localStorage.getItem("dataUser");
+    userName = localStorage.getItem("dataUser");
     userName = JSON.parse(userName).firstName;
 
 } catch (error) {
@@ -21,29 +21,71 @@ try {
 
 
     currentWindow = window.location.pathname;
-    registerBtnFlag = `display:none;`;
-    loginBtnFlag = `display:none;`;
+    console.log(currentWindow);
+    registerBtnFlag = `d-none`;
+    loginBtnFlag = `d-none`;
+    currentUser = `d-none`;
+    withoutUser = `d-none`;
 
     switch (currentWindow) {
         case "/index.html":
 
-            registerBtnFlag = ``;
-            loginBtnFlag = ``;
+            if (userName == '') {
+                withoutUser = ``;
+                registerBtnFlag = `rounded-end`;
+                loginBtnFlag = `rounded-start border-end`;
+            }
+            else {
+                withoutUser = `d-none`;
+                registerBtnFlag = `d-none`;
+                loginBtnFlag = `d-none`;
+                currentUser = ``;
+            }
+
+            break;
+
+        case "/":
+
+            if (userName == '') {
+                withoutUser = ``;
+                registerBtnFlag = `rounded-end`;
+                loginBtnFlag = `rounded-start border-end`;
+            }
+            else {
+                withoutUser = `d-none`;
+                registerBtnFlag = `d-none`;
+                loginBtnFlag = `d-none`;
+                currentUser = ``;
+            }
+
             break;
 
         case "/login.html":
-
-            registerBtnFlag = ``;
-            loginBtnFlag = `display:none;`;
+            console.log("Entre al loguin")
+            withoutUser = ``;
+            currentUser = `d-none`;
+            registerBtnFlag = `rounded`;
+            loginBtnFlag = `d-none`;
             break;
         case "/register.html":
 
-            registerBtnFlag = `display:none;`;
-            loginBtnFlag = ``;
+            withoutUser = ``;
+            currentUser = `d-none`;
+            registerBtnFlag = `d-none`;
+            loginBtnFlag = `rounded`;
             break;
         default:
-            registerBtnFlag = ``;
-            loginBtnFlag = ``;
+            if (userName == '') {
+                withoutUser = ``;
+                registerBtnFlag = `rounded-end`;
+                loginBtnFlag = `rounded-start border-end`;
+            }
+            else {
+                withoutUser = `d-none`;
+                registerBtnFlag = `d-none`;
+                loginBtnFlag = `d-none`;
+                currentUser = ``;
+            }
             break;
     }
 
@@ -71,8 +113,8 @@ try {
                 <li class="nav-item "><a class="nav-link px-4 text-white" href="aboutus.html">Conocenos</a></li>
 
             </ul>
-            <div class="col">
-                <div class="dropdown">
+            <div class="col ">
+                <div class="dropdown `+ currentUser + `">
                     <a href="#"
                         class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle justify-content-center "
                         id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -91,9 +133,42 @@ try {
                         <li><a class="dropdown-item" href="#">Salir</a></li>
                     </ul>
                 </div>
+
+                <div class="btn-group `+ withoutUser + `">
+                     
+                    <a href="login.html" class="btnLogin p-2  `+ loginBtnFlag + `" type="button">Acceder</a>
+                    <a href="register.html" class="btnRegister   p-2  `+ registerBtnFlag + `" type="button">Registrarse</a>
+                    
+                </div>
             </div>
 
         </nav>`;
 
 }());
+
+window.addEventListener("load", () => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/user/currentUser");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+    xhr.send();
+    xhr.responseType = "json";
+
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            data = xhr.response;
+
+
+        }
+        else if (xhr.status == 403) {
+            localStorage.removeItem("dataUser");
+            localStorage.removeItem("token");
+        }
+        else {
+
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+})
 

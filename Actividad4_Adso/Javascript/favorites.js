@@ -202,6 +202,8 @@ window.addEventListener("load", () => {
         }
         else if (xhr.status == 403) {
             window.location.href = "login.html";
+            localStorage.removeItem("dataUser");
+            localStorage.removeItem("token");
         }
         else {
 

@@ -9,8 +9,8 @@ var sentInfo;
 
 function createObjUser() {
     var objUser = {
-        "username": "1004380308",
-        "password": "1234",
+        "username": username.value,
+        "password": password.value,
     };
 
     return JSON.stringify(objUser);
@@ -29,7 +29,10 @@ function login() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             data = xhr.response;
             data = JSON.parse(data);
+            localStorage.removeItem("dataUser");
+            localStorage.removeItem("token");
             localStorage.setItem("token", data.jwt)
+            localStorage.setItem("dataUser", data)
             window.location.href = "services.html";
 
 
