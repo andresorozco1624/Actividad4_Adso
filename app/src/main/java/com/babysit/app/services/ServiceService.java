@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -50,7 +51,11 @@ public class ServiceService {
         ServiceEntity serviceEntity = this.serviceRepository.getReferenceById(serviceId);
 
         serviceEntity.setState(serviceRequest.getState());
-        serviceEntity.setBabysit(this.userRepository.getReferenceById(serviceRequest.getBabysitId()));
+
+        if (serviceEntity.getBabysit() == null){
+            serviceEntity.setBabysit(this.userRepository.getReferenceById(serviceRequest.getBabysitId()));
+        }
+
         serviceRepository.save(serviceEntity);
 
         return "Actualizado";
@@ -64,6 +69,30 @@ public class ServiceService {
         serviceEntity.setPagoId(this.paymentRepository.getReferenceById(serviceId + 1000));
 
         this.serviceRepository.save(serviceEntity);
+        return "Actualizado";
+    }
+    public String changeFlagState(Long serviceId, Long userId) {
+        ServiceEntity serviceEntity = this.serviceRepository.findById(serviceId).get();
+        UserEntity userEntity = this.userRepository.findById(userId).get();
+
+        if (Objects.equals(userEntity.getRol().getTitle(), "CLIENT")){
+            serviceEntity.setFlagClient(Boolean.TRUE);
+            if (serviceEntity.getFlagBabysit() == Boolean.TRUE && serviceEntity.getState() == ServiceState.RESERVED){
+                serviceEntity.setState(ServiceState.IN_PROGRESS);
+                serviceEntity.setFlagClient(Boolean.FALSE);
+                serviceEntity.setFlagBabysit(Boolean.FALSE);
+            }
+        }
+        else {
+            serviceEntity.setFlagBabysit(Boolean.TRUE);
+            if(serviceEntity.getFlagClient() == Boolean.TRUE && serviceEntity.getState() == ServiceState.RESERVED){
+                serviceEntity.setState(ServiceState.IN_PROGRESS);
+                serviceEntity.setFlagClient(Boolean.FALSE);
+                serviceEntity.setFlagBabysit(Boolean.FALSE);
+            }
+        }
+        this.serviceRepository.save(serviceEntity);
+
         return "Actualizado";
     }
 
@@ -138,4 +167,6 @@ public class ServiceService {
         List<ServiceEntity> services = this.serviceRepository.findByUser(userEntity);
         return becomeToDto(services);
     }
+
+
 }

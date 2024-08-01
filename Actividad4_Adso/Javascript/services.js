@@ -18,6 +18,10 @@ var canceled = document.getElementById("canceled");
 var completed = document.getElementById("completed");
 
 
+var cards;
+var selectedService;
+
+
 const States = Object.freeze({
     REQUESTED: 'REQUESTED',
     RESERVED: 'RESERVED',
@@ -81,7 +85,10 @@ function addServices(data) {
     for (i = 0; i < data.length; i++) {
         const newService = document.createElement('div');
         serviceId = 100000 + data[i].id
+        newService.id = data[i].id;
+        newService.setAttribute("state", data[i].state);
         newService.classList.add("card", "border-primary", "mb-3", "ms-2");
+
         var babysitName = "";
         var clientName = "";
 
@@ -101,8 +108,7 @@ function addServices(data) {
         if (data[i].babysitName != null && userData.rol.title == "CLIENT") {
             babysitName = data[i].babysitName;
             if (data[i].state == States.REQUESTED) {
-
-                gruopButtons = "d-node";
+                gruopButtons = "d-none";
             }
             if (data[i].state == States.RESERVED) {
 
@@ -127,14 +133,19 @@ function addServices(data) {
                 gruopButtons = "";
             }
             if (data[i].state == States.RESERVED) {
-                gruopButtons = "";
+                gruopButtons = "d-none";
+                changeBtn = "";
             }
             if (data[i].state == States.IN_PROGRESS) {
-                gruopButtons = "";
+                gruopButtons = "d-none";
+                changeBtn = "";
+                paymentFile = "";
+                paymentCol = "col-3";
+                textBtn = "Pagar"
 
             }
             if (data[i].state == States.COMPLETED) {
-                gruopButtons = "";
+
             }
         }
 
@@ -190,13 +201,13 @@ function addServices(data) {
                                 
                                         <p class="`+ waitText + `">Esperando confirmación...</p>
                                         <div class="row btn-group shadow border mt-0 w-100 mb-2 `+ gruopButtons + `" role="group" >
-                                            <a href="/findbabysister.html" class="btn border-end btn-danger col-6"><strong>Cancelar</strong></a>
-                                            <a href="/workwithus.html" class="btn btn-success col-6"><strong>Aceptar</strong> </a>
+                                            <a href="#" class="btn border-end btn-danger col-6"><strong>Cancelar</strong></a>
+                                            <a href="#" class="btn btn-success col-6"><strong>Aceptar</strong> </a>
         
                                         </div>
                                         <div class="row shadow  border mt-0 w-100 mb-2 rounded `+ changeBtn + `"  >
                                             <input type="file" placeholder="Sube tu soporte"  class="form-control col  `+ paymentFile + `" />
-                                            <a href="/workwithus.html" class="btn btn-success `+ paymentCol + `"><strong>` + textBtn + `</strong> </a>
+                                            <a href="#" class="btn btn-success `+ paymentCol + `"><strong>` + textBtn + `</strong> </a>
         
                                         </div>
 
@@ -246,6 +257,13 @@ requested.addEventListener("click", () => {
             data = xhr.response;
             console.log(data);
             addServices(data);
+            cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    console.log("click");
+                })
+            })
+
         } else {
             console.log(`Error: ${xhr.status}`);
         }
@@ -269,6 +287,12 @@ window.addEventListener("load", () => {
             userId = userData.id;
 
             getAllRequested();
+            cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                card.addEventListener("click", () => {
+                    console.log("click");
+                })
+            })
 
 
         }
@@ -298,6 +322,22 @@ reserved.addEventListener("click", () => {
             data = xhr.response;
             console.log(data);
             addServices(data);
+            cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                btn = card.querySelectorAll(".btn-success")[1];
+
+                btn.addEventListener("click", () => {
+                    if (card.getAttribute("state") == States.RESERVED) {
+                        changeFlag(card.id, userData.id);
+                    }
+
+
+
+                })
+
+
+
+            })
         } else {
             console.log(`Error: ${xhr.status}`);
         }
@@ -404,8 +444,74 @@ function getAllRequested() {
             data = xhr.response;
             console.log(data);
             addServices(data);
+            cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                btn = card.querySelectorAll(".btn-success")[0];
+
+                btn.addEventListener("click", () => {
+                    if (userData.rol.title == "BABYSIT" && card.getAttribute("state") == States.REQUESTED) {
+                        changeState(card.id);
+                    }
+
+
+
+                })
+
+
+
+            })
+
+
         } else {
             console.log(`Error: ${xhr.status}`);
         }
     };
 }
+
+
+
+function changeState(serviceId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", url + "/reserved/" + serviceId);
+    objetjson = JSON.stringify({
+        "state": States.RESERVED
+    })
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+    xhr.send(objetjson);
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            location.reload();
+
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+
+
+}
+
+function changeFlag(serviceId, userId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", url + "/change/" + serviceId + "/" + userId);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+    xhr.send();
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            location.reload();
+
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+}
+

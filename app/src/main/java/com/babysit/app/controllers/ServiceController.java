@@ -47,6 +47,11 @@ public class ServiceController {
         return this.serviceService.updateServiceInProgress(serviceRequest,serviceId);
     }
 
+    @PutMapping("/change/{serviceId}/{userId}")
+    public String changeFlagState(@PathVariable("userId") Long userId, @PathVariable("serviceId") Long serviceId){
+        return this.serviceService.changeFlagState(serviceId,userId);
+    }
+
     @GetMapping("/state/{state}")
     public List<ServiceResponseDetailDto> getServiceByState(@PathVariable("state") String state){
         return this.serviceService.getServiceByState(state);
@@ -61,8 +66,6 @@ public class ServiceController {
     public List<ServiceResponseDetailDto> getServicesByUser (@PathVariable("userId")Long userId){
         return this.serviceService.getServicesByUser(userId);
     }
-
-
 
 
     @GetMapping("/all")

@@ -40,6 +40,12 @@ public class ServiceEntity {
     @Enumerated(EnumType.STRING)
     private ServiceState state;
 
+    @Column(name = "flagClient",columnDefinition = "boolean default false")
+    private Boolean flagClient;
+
+    @Column(name = "flagBabysit",columnDefinition = "boolean default false")
+    private Boolean flagBabysit;
+
     @Column(name = "indication")
     private String indication;
 
