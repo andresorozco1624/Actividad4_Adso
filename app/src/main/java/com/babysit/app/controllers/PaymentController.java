@@ -19,7 +19,7 @@ public class PaymentController {
 
     @PutMapping("/state/inprogress/{paymentId}")
     public String updatePaymentInProgress (@RequestBody PaymentRequestUpdateInProgress paymentRequest, @PathVariable("paymentId") Long paymentId){
-        return this.paymentService.updatePaymentInProgress(paymentRequest,paymentId);
+        return this.paymentService.updatePaymentInProgress( paymentRequest,paymentId);
     }
 
     @PutMapping("/state/end/{paymentId}")
@@ -47,5 +47,7 @@ public class PaymentController {
     public List<PaymentResponseDetailDto> findByUserAndState(@PathVariable("userId") Long userId , @PathVariable("state") String state) {
         return this.paymentService.findByUserAndState(userId,state);
     }
+
+
 
 }

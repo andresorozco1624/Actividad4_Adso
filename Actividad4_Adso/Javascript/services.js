@@ -31,6 +31,7 @@ const States = Object.freeze({
 });
 
 
+
 const url = "http://localhost:8080/service";
 
 
@@ -84,7 +85,7 @@ function addServices(data) {
 
     for (i = 0; i < data.length; i++) {
         const newService = document.createElement('div');
-        serviceId = 100000 + data[i].id
+        serviceId = 1000 + data[i].id
         newService.id = data[i].id;
         newService.setAttribute("state", data[i].state);
         newService.classList.add("card", "border-primary", "mb-3", "ms-2");
@@ -206,7 +207,7 @@ function addServices(data) {
         
                                         </div>
                                         <div class="row shadow  border mt-0 w-100 mb-2 rounded `+ changeBtn + `"  >
-                                            <input type="file" placeholder="Sube tu soporte"  class="form-control col  `+ paymentFile + `" />
+                                            <input type="file" placeholder="Sube tu soporte"   class="form-control payDocument col  `+ paymentFile + `" />
                                             <a href="#" class="btn btn-success `+ paymentCol + `"><strong>` + textBtn + `</strong> </a>
         
                                         </div>
@@ -358,6 +359,28 @@ inProgress.addEventListener("click", () => {
             data = xhr.response;
             console.log(data);
             addServices(data);
+
+            cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                btn = card.querySelectorAll(".btn-success")[1];
+
+                btn.addEventListener("click", () => {
+                    if (card.getAttribute("state") == States.IN_PROGRESS) {
+                        var files = card.querySelector(".payDocument").files;
+                        var formData = new FormData();
+                        formData.append("file", files[0]);
+                        savePaymentDocument(formData, 1000 + parseInt(card.id));
+                        console.log(card.id);
+                    }
+
+                })
+
+
+
+            })
+
+
+
         } else {
             console.log(`Error: ${xhr.status}`);
         }
@@ -450,6 +473,7 @@ function getAllRequested() {
 
                 btn.addEventListener("click", () => {
                     if (userData.rol.title == "BABYSIT" && card.getAttribute("state") == States.REQUESTED) {
+
                         changeState(card.id);
                     }
 
@@ -507,6 +531,59 @@ function changeFlag(serviceId, userId) {
             const data = xhr.response;
             console.log(data);
             location.reload();
+
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+}
+
+function savePaymentDocument(file, serviceId) {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("POST", url + "/saveFile");
+    //xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=<calculated when request is sent>");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+    xhr.send(file);
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            updatePaymentInProgress(data, serviceId);
+            //location.reload();
+
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+
+}
+
+function updatePaymentInProgress(nameFile, paymentId) {
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", "http://localhost:8080/payment/state/inprogress/" + paymentId);
+    objetjson = JSON.stringify(
+        {
+            "date": new Date(),
+            "state": States.IN_PROGRESS,
+            "type": "CASH",
+            "file": nameFile
+        }
+    );
+
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+    xhr.send(objetjson);
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            //location.reload();
 
         } else {
             alert("No funcina");

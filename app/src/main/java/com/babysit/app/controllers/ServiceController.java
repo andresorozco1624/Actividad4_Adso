@@ -10,8 +10,13 @@ import com.babysit.app.services.PaymentService;
 import com.babysit.app.services.ServiceService;
 import com.babysit.app.utils.ServiceState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,4 +78,18 @@ public class ServiceController {
         return this.serviceService.findAllServices();
     }
 
+
+    @PostMapping("/saveFile")
+    public ResponseEntity saveFile (@RequestParam("file")MultipartFile file) throws IOException {
+        String fileName = Math.random()*10000 + "-" + file.getOriginalFilename();
+        //try {
+            String basePathToUpload = "C:/xampp/htdocs/payments/";
+            String newPath =  basePathToUpload + fileName;
+            System.out.println("Aquiii >> " + newPath);
+            file.transferTo( new File(newPath));
+        /*} catch (Exception e) {x
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }*/
+        return ResponseEntity.ok(fileName);
+    }
 }

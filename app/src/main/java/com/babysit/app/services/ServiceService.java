@@ -79,6 +79,8 @@ public class ServiceService {
             serviceEntity.setFlagClient(Boolean.TRUE);
             if (serviceEntity.getFlagBabysit() == Boolean.TRUE && serviceEntity.getState() == ServiceState.RESERVED){
                 serviceEntity.setState(ServiceState.IN_PROGRESS);
+                createPayment(serviceEntity);
+                serviceEntity.setPagoId(this.paymentRepository.getReferenceById(serviceId + 1000));
                 serviceEntity.setFlagClient(Boolean.FALSE);
                 serviceEntity.setFlagBabysit(Boolean.FALSE);
             }
@@ -87,6 +89,8 @@ public class ServiceService {
             serviceEntity.setFlagBabysit(Boolean.TRUE);
             if(serviceEntity.getFlagClient() == Boolean.TRUE && serviceEntity.getState() == ServiceState.RESERVED){
                 serviceEntity.setState(ServiceState.IN_PROGRESS);
+                createPayment(serviceEntity);
+                serviceEntity.setPagoId(this.paymentRepository.getReferenceById(serviceId + 1000));
                 serviceEntity.setFlagClient(Boolean.FALSE);
                 serviceEntity.setFlagBabysit(Boolean.FALSE);
             }

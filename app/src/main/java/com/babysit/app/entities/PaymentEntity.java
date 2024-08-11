@@ -23,6 +23,9 @@ public class PaymentEntity {
     @Column(name = "date")
     private LocalDateTime date;
 
+    @Column(name = "file")
+    private String file;
+
 
     @Column(name = "fare", nullable = false)
     private double fare;

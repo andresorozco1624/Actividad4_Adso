@@ -16,4 +16,5 @@ public class PaymentRequestUpdateInProgress {
     private LocalDateTime date;
     private PaymentState state;
     private PaymentType type;
+    private String file;
 }

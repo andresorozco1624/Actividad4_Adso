@@ -37,6 +37,7 @@ public class PaymentService {
         paymentEntity.setDate(paymentRequest.getDate());
         paymentEntity.setState(paymentRequest.getState());
         paymentEntity.setType(paymentRequest.getType());
+        paymentEntity.setFile(paymentRequest.getFile());
 
         this.paymentRepository.save(paymentEntity);
         return "Actualizado";
