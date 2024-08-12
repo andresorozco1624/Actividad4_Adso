@@ -115,6 +115,10 @@ function addServices(data) {
 
                 gruopButtons = "d-none";
                 changeBtn = "";
+                if (data[i].flagClient == true) {
+                    changeBtn = "d-none";
+                    waitText = "";
+                }
             }
             if (data[i].state == States.IN_PROGRESS) {
                 gruopButtons = "d-none";
@@ -136,6 +140,10 @@ function addServices(data) {
             if (data[i].state == States.RESERVED) {
                 gruopButtons = "d-none";
                 changeBtn = "";
+                if (data[i].flagBabysit == true) {
+                    changeBtn = "d-none";
+                    waitText = "";
+                }
             }
             if (data[i].state == States.IN_PROGRESS) {
                 gruopButtons = "d-none";

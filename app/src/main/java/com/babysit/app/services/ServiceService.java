@@ -151,6 +151,8 @@ public class ServiceService {
             serviceResponse.setFare(serviceEntity.getFare());
             serviceResponse.setId(serviceEntity.getId());
             serviceResponse.setState(serviceEntity.getState());
+            serviceResponse.setFlagClient(serviceEntity.getFlagClient());
+            serviceResponse.setFlagBabysit(serviceEntity.getFlagBabysit());
             if(serviceEntity.getBabysit()!= null){
                 serviceResponse.setBabysitName(serviceEntity.getBabysit().getFirstName());
             }

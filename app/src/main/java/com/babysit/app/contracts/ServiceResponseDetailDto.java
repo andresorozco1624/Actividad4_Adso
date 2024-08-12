@@ -21,5 +21,7 @@ public class ServiceResponseDetailDto {
     private String babysitName;
     private String clientName;
     private Long noChildren;
+    private Boolean flagBabysit;
+    private Boolean flagClient;
 
 }
