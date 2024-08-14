@@ -68,7 +68,7 @@ public class PaymentService {
             paymentResponse.setFare(paymentEntity.getFare());
             paymentResponse.setId(paymentEntity.getId());
             paymentResponse.setService(paymentEntity.getServiceEntity().getId());
-
+            paymentResponse.setFile(paymentEntity.getFile());
             paymentResponseFilterStateDtos.add(paymentResponse);
 
         }
@@ -119,5 +119,14 @@ public class PaymentService {
         }
 
         return becomeToDto(paymentEntities);
+    }
+
+    public String getNameFile(Long paymentId) {
+
+        if(!this.paymentRepository.existsById(paymentId)){
+            return "";
+        }
+        PaymentEntity paymentEntity = this.paymentRepository.findById(paymentId).get();
+        return paymentEntity.getFile();
     }
 }

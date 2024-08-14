@@ -5,6 +5,7 @@ import com.babysit.app.contracts.PaymentRequestUpdateInProgress;
 import com.babysit.app.contracts.PaymentResponseDetailDto;
 import com.babysit.app.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +47,11 @@ public class PaymentController {
     @GetMapping("/{userId}/state/{state}")
     public List<PaymentResponseDetailDto> findByUserAndState(@PathVariable("userId") Long userId , @PathVariable("state") String state) {
         return this.paymentService.findByUserAndState(userId,state);
+    }
+
+    @GetMapping("/{paymentId}/nameFile")
+    public String nameFile (@PathVariable("paymentId") Long paymentId){
+        return this.paymentService.getNameFile(paymentId);
     }
 
 

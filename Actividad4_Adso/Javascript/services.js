@@ -39,6 +39,7 @@ const url = "http://localhost:8080/service";
 
 var data;
 var userData;
+var nameFile;
 
 function createObjectService() {
     var objService = {
@@ -101,6 +102,10 @@ function addServices(data) {
         var textBtn = "¿En curso?";
         var paymentFile = "d-none";
         var paymentCol = "col";
+        var payFileDiv = "d-none";
+
+
+
 
 
 
@@ -125,10 +130,17 @@ function addServices(data) {
                 changeBtn = "";
                 paymentFile = "";
                 paymentCol = "col-3";
-                textBtn = "Pagar"
+                textBtn = "Pagar";
+
+                if (data[i].flagClient == true) {
+                    changeBtn = "d-none";
+                    gruopButtons = "d-none";
+                    waitText = "";
+                }
             }
             if (data[i].state == States.COMPLETED) {
-                gruopButtons = "";
+                gruopButtons = "d-none";
+                changeBtn = "d-none";
             }
         }
 
@@ -146,14 +158,25 @@ function addServices(data) {
                 }
             }
             if (data[i].state == States.IN_PROGRESS) {
-                gruopButtons = "d-none";
-                changeBtn = "";
-                paymentFile = "";
-                paymentCol = "col-3";
-                textBtn = "Pagar"
+
+                if (data[i].flagClient == true) {
+                    gruopButtons = "d-none";
+                    changeBtn = "";
+                    paymentFile = "d-none";
+                    payFileDiv = "";
+                    paymentCol = "col-3";
+                    textBtn = "Aceptar"
+                }
+                else {
+                    gruopButtons = "d-none";
+                    changeBtn = "d-none";
+                    waitText = "";
+                }
 
             }
             if (data[i].state == States.COMPLETED) {
+                gruopButtons = "d-none";
+                changeBtn = "d-none";
 
             }
         }
@@ -216,6 +239,11 @@ function addServices(data) {
                                         </div>
                                         <div class="row shadow  border mt-0 w-100 mb-2 rounded `+ changeBtn + `"  >
                                             <input type="file" placeholder="Sube tu soporte"   class="form-control payDocument col  `+ paymentFile + `" />
+                                            <a href="http://localhost/payments/" class="btn col documentBtn d-flex align-items-baseline justify-content-center` + payFileDiv + `"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"/> <style>
+                        .documentBtn svg {
+                            fill: gray;
+                        }
+                    </style></svg>Soporte de Pago</a>
                                             <a href="#" class="btn btn-success `+ paymentCol + `"><strong>` + textBtn + `</strong> </a>
         
                                         </div>
@@ -226,7 +254,9 @@ function addServices(data) {
                             </div>
                         `;
 
+
         servicesCard.appendChild(newService);
+        getNameFile(1000 + parseInt(data[i].id), i);
 
 
     }
@@ -378,6 +408,8 @@ inProgress.addEventListener("click", () => {
                         var formData = new FormData();
                         formData.append("file", files[0]);
                         savePaymentDocument(formData, 1000 + parseInt(card.id));
+                        changeFlag(card.id, userData.id);
+
                         console.log(card.id);
                     }
 
@@ -598,5 +630,32 @@ function updatePaymentInProgress(nameFile, paymentId) {
             console.log(`Error: ${xhr.status}`);
         }
     };
+}
+
+
+async function getNameFile(paymentId, cardId) {
+
+    myPromise = new Promise(function (resolve) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost:8080/payment/" + paymentId + "/nameFile");
+        xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+
+        xhr.send();
+        // xhr.responseType = "json";
+        xhr.onload = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                resolve(xhr.response);
+                console.log(data);
+
+            } else {
+                console.log(`Error: ${xhr.status}`);
+            }
+        };
+    });
+
+    document.querySelectorAll(".card")[cardId].querySelector(".documentBtn").setAttribute("href", "http://localhost/payments/" + await myPromise);
+
 }
 

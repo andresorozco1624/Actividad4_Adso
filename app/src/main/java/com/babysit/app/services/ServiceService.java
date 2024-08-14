@@ -84,6 +84,7 @@ public class ServiceService {
                 serviceEntity.setFlagClient(Boolean.FALSE);
                 serviceEntity.setFlagBabysit(Boolean.FALSE);
             }
+
         }
         else {
             serviceEntity.setFlagBabysit(Boolean.TRUE);
@@ -91,6 +92,11 @@ public class ServiceService {
                 serviceEntity.setState(ServiceState.IN_PROGRESS);
                 createPayment(serviceEntity);
                 serviceEntity.setPagoId(this.paymentRepository.getReferenceById(serviceId + 1000));
+                serviceEntity.setFlagClient(Boolean.FALSE);
+                serviceEntity.setFlagBabysit(Boolean.FALSE);
+            }
+            if(serviceEntity.getFlagClient() == Boolean.TRUE && serviceEntity.getState() == ServiceState.IN_PROGRESS){
+                serviceEntity.setState(ServiceState.COMPLETED);
                 serviceEntity.setFlagClient(Boolean.FALSE);
                 serviceEntity.setFlagBabysit(Boolean.FALSE);
             }
