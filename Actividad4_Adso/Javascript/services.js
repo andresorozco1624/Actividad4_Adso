@@ -103,6 +103,8 @@ function addServices(data) {
         var paymentFile = "d-none";
         var paymentCol = "col";
         var payFileDiv = "d-none";
+        var btnDanger = "d-none";
+        var textBtnCanceled = "Cancelar";
 
 
 
@@ -115,11 +117,13 @@ function addServices(data) {
             babysitName = data[i].babysitName;
             if (data[i].state == States.REQUESTED) {
                 gruopButtons = "d-none";
+                btnDanger = "";
             }
             if (data[i].state == States.RESERVED) {
 
                 gruopButtons = "d-none";
                 changeBtn = "";
+                btnDanger = "col-6";
                 if (data[i].flagClient == true) {
                     changeBtn = "d-none";
                     waitText = "";
@@ -152,6 +156,8 @@ function addServices(data) {
             if (data[i].state == States.RESERVED) {
                 gruopButtons = "d-none";
                 changeBtn = "";
+                btnDanger = "col-6";
+
                 if (data[i].flagBabysit == true) {
                     changeBtn = "d-none";
                     waitText = "";
@@ -165,7 +171,9 @@ function addServices(data) {
                     paymentFile = "d-none";
                     payFileDiv = "";
                     paymentCol = "col-3";
-                    textBtn = "Aceptar"
+                    btnDanger = "col-3";
+                    textBtn = "Aceptar";
+                    textBtnCanceled = "Recobrar";
                 }
                 else {
                     gruopButtons = "d-none";
@@ -239,12 +247,13 @@ function addServices(data) {
                                         </div>
                                         <div class="row shadow  border mt-0 w-100 mb-2 rounded `+ changeBtn + `"  >
                                             <input type="file" placeholder="Sube tu soporte"   class="form-control payDocument col  `+ paymentFile + `" />
-                                            <a href="http://localhost/payments/" class="btn col documentBtn d-flex align-items-baseline justify-content-center` + payFileDiv + `"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"/> <style>
+                                            <a href="http://localhost/payments/" class="btn col documentBtn d-flex align-items-baseline justify-content-center ` + payFileDiv + `"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"/> <style>
                         .documentBtn svg {
                             fill: gray;
                         }
                     </style></svg>Soporte de Pago</a>
-                                            <a href="#" class="btn btn-success `+ paymentCol + `"><strong>` + textBtn + `</strong> </a>
+                                            <a href="#" class="btn border-end btn-danger  `+ btnDanger + `"><strong>` + textBtnCanceled + `</strong></a>
+                                            <a href="#" class="btn btn-success `+ paymentCol + `"><strong>` + textBtn + `</strong></a>
         
                                         </div>
 
@@ -364,14 +373,16 @@ reserved.addEventListener("click", () => {
             cards = document.querySelectorAll(".card");
             cards.forEach(card => {
                 btn = card.querySelectorAll(".btn-success")[1];
+                btnCanceled = card.querySelectorAll(".btn-danger")[1];
 
                 btn.addEventListener("click", () => {
                     if (card.getAttribute("state") == States.RESERVED) {
                         changeFlag(card.id, userData.id);
                     }
+                })
 
-
-
+                btnCanceled.addEventListener("click", () => {
+                    canceledService(card.id);
                 })
 
 
@@ -401,18 +412,32 @@ inProgress.addEventListener("click", () => {
             cards = document.querySelectorAll(".card");
             cards.forEach(card => {
                 btn = card.querySelectorAll(".btn-success")[1];
+                btnCanceled = card.querySelectorAll(".btn-danger")[1];
 
                 btn.addEventListener("click", () => {
-                    if (card.getAttribute("state") == States.IN_PROGRESS) {
-                        var files = card.querySelector(".payDocument").files;
-                        var formData = new FormData();
-                        formData.append("file", files[0]);
-                        savePaymentDocument(formData, 1000 + parseInt(card.id));
-                        changeFlag(card.id, userData.id);
 
-                        console.log(card.id);
+                    if (card.getAttribute("state") == States.IN_PROGRESS) {
+
+                        if (btn.text == "Pagar") {
+                            var files = card.querySelector(".payDocument").files;
+                            var formData = new FormData();
+                            formData.append("file", files[0]);
+                            savePaymentDocument(formData, 1000 + parseInt(card.id));
+                            changeFlag(card.id, userData.id);
+                            console.log(card.id);
+                        }
+
+                        if (btn.text == "Aceptar") {
+                            changeFlag(card.id, userData.id);
+
+                        }
+
                     }
 
+                })
+
+                btnCanceled.addEventListener("click", () => {
+                    paymentCanceled(card.id);
                 })
 
 
@@ -560,6 +585,26 @@ function changeState(serviceId) {
 
 }
 
+function paymentCanceled(serviceId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", url + "/paymentCanceled/" + serviceId);
+
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+    xhr.send();
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            location.reload();
+
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+}
+
 function changeFlag(serviceId, userId) {
     const xhr = new XMLHttpRequest();
     xhr.open("PUT", url + "/change/" + serviceId + "/" + userId);
@@ -632,6 +677,26 @@ function updatePaymentInProgress(nameFile, paymentId) {
     };
 }
 
+function canceledService(serviceId) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("PUT", url + "/canceled/" + serviceId);
+
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("token"));
+    xhr.send();
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = xhr.response;
+            console.log(data);
+            location.reload();
+
+        } else {
+            alert("No funcina");
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+}
+
 
 async function getNameFile(paymentId, cardId) {
 
@@ -647,7 +712,7 @@ async function getNameFile(paymentId, cardId) {
             if (xhr.readyState == 4 && xhr.status == 200) {
 
                 resolve(xhr.response);
-                console.log(data);
+
 
             } else {
                 console.log(`Error: ${xhr.status}`);

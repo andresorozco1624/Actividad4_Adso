@@ -181,4 +181,20 @@ public class ServiceService {
     }
 
 
+    public String updateServiceCanceled(Long serviceId) {
+        ServiceEntity serviceEntity = this.serviceRepository.findById(serviceId).get();
+        serviceEntity.setState(ServiceState.CANCELED);
+        this.serviceRepository.save(serviceEntity);
+        return "Servicio Cancelado";
+    }
+
+    public String paymentCanceled(Long serviceId) {
+        ServiceEntity serviceEntity = this.serviceRepository.findById(serviceId).get();
+        PaymentEntity paymentEntity = this.paymentRepository.findById(serviceId + 1000L).get();
+        paymentEntity.setFile(null);
+        paymentEntity.setDate(null);
+        serviceEntity.setFlagClient(Boolean.FALSE);
+        this.serviceRepository.save(serviceEntity);
+        return  "Pago Rechazado";
+    }
 }

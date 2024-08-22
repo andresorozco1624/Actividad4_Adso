@@ -5,10 +5,14 @@ import com.babysit.app.contracts.UserRequestEditDto;
 import com.babysit.app.contracts.UserResponseDetailDto;
 import com.babysit.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -68,6 +72,20 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserResponseDetailDto userResponse = this.service.getCurrentUser(authentication);
         return userResponse;
+    }
+
+    @PostMapping("/savePhoto")
+    public ResponseEntity savePhoto (@RequestParam("photo") MultipartFile file) throws IOException {
+        String fileName = Math.random()*10000 + "-" + file.getOriginalFilename();
+        //try {
+        String basePathToUpload = "C:/xampp/htdocs/profilePhoto/";
+        String newPath =  basePathToUpload + fileName;
+        System.out.println("Aquiii >> " + newPath);
+        file.transferTo( new File(newPath));
+        /*} catch (Exception e) {x
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }*/
+        return ResponseEntity.ok(fileName);
     }
 
 }

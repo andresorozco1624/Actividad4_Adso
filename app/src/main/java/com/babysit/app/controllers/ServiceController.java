@@ -57,6 +57,18 @@ public class ServiceController {
         return this.serviceService.changeFlagState(serviceId,userId);
     }
 
+    @PutMapping("/paymentCanceled/{serviceId}")
+    public String paymentCanceled(@PathVariable("serviceId") Long serviceId){
+        return this.serviceService.paymentCanceled(serviceId);
+    }
+
+    @PutMapping("/canceled/{serviceId}")
+    public String updateServiceCanceled(@PathVariable("serviceId") Long serviceId){
+        return this.serviceService.updateServiceCanceled(serviceId);
+    }
+
+
+
     @GetMapping("/state/{state}")
     public List<ServiceResponseDetailDto> getServiceByState(@PathVariable("state") String state){
         return this.serviceService.getServiceByState(state);
@@ -92,4 +104,6 @@ public class ServiceController {
         }*/
         return ResponseEntity.ok(fileName);
     }
+
+
 }
